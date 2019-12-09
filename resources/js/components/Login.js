@@ -1,9 +1,96 @@
 import React, { Component, Fragment } from "react";
 
+import { FormErrors } from "./FormErrors";
 import "./Login.css";
 
 export class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "",
+            password: "",
+            formErrors: { email: "", password: "" },
+            emailValid: false,
+            passwordValid: false,
+            formValid: false
+        };
+
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+    }
+    isValid() {
+        if (!this.state.email) {
+            errors.email = 'Заповніть поле "Емайл"';
+        }
+
+        if (!this.state.password) {
+            errors.password = 'Заповніть поле "Пароль"';
+        }
+
+        this.setState({ errors });
+
+        return isValid;
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+        if (this.isValid()) {
+            this.setState({ errors: {} });
+            console.log("isvalid", this.isValid);
+        }
+        // else {
+        //     var data=e.response.data;
+        //     this.setState({ errors: data.errors}) ;
+        // }
+    }
+
+    validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+
+        switch (fieldName) {
+            case "email":
+                emailValid = value.match(
+                    /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i
+                );
+                fieldValidationErrors.email = emailValid ? "" : " is invalid";
+                break;
+            case "password":
+                passwordValid = value.length >= 6;
+                fieldValidationErrors.password = passwordValid
+                    ? ""
+                    : " is too short";
+                break;
+            default:
+                break;
+        }
+        this.setState(
+            {
+                formErrors: fieldValidationErrors,
+                emailValid: emailValid,
+                passwordValid: passwordValid
+            },
+            this.validateForm
+        );
+    }
+
+    validateForm() {
+        this.setState({
+            formValid: this.state.emailValid && this.state.passwordValid
+        });
+    }
+
+    onChange(e) {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({ [name]: value }, () => {
+            this.validateField(name, value);
+        });
+    }
+
     render() {
+        const { email, password, errors } = this.state;
         return (
             <div>
                 <Fragment>
@@ -35,8 +122,11 @@ export class Login extends Component {
                                             </div>
                                             <input
                                                 type="text"
+                                                name="email"
                                                 className="form-control"
                                                 placeholder="username"
+                                                value={email}
+                                                onChange={this.onChange}
                                             />
                                         </div>
                                         <div className="input-group form-group">
@@ -47,8 +137,11 @@ export class Login extends Component {
                                             </div>
                                             <input
                                                 type="password"
+                                                name="password"
                                                 className="form-control"
                                                 placeholder="password"
+                                                onChange={this.onChange}
+                                                value={password}
                                             />
                                         </div>
                                         <div className="row align-items-center remember">
@@ -62,7 +155,21 @@ export class Login extends Component {
                                                 className="btn float-right login_btn"
                                             />
                                         </div>
+
+                                        <button
+                                            type="submit"
+                                            value="Login"
+                                            className="btn float-right login_btn"
+                                            disabled={!this.state.formValid}
+                                        >
+                                            Sign up
+                                        </button>
                                     </form>
+                                    <div className="panel panel-default">
+                                        <FormErrors
+                                            formErrors={this.state.formErrors}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="card-footer">
                                     <div className="d-flex justify-content-center links">

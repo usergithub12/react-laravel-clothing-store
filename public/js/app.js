@@ -51795,7 +51795,7 @@ function (_Component) {
   _createClass(Example, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "laravel-react"), ";", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login_js__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Registration__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "laravel-react"), ";", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login_js__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -51807,6 +51807,36 @@ function (_Component) {
 if (document.getElementById("app")) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Example, null), document.getElementById("app"));
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/FormErrors.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/FormErrors.js ***!
+  \***********************************************/
+/*! exports provided: FormErrors */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormErrors", function() { return FormErrors; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var FormErrors = function FormErrors(_ref) {
+  var formErrors = _ref.formErrors;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "formErrors"
+  }, Object.keys(formErrors).map(function (fieldName, i) {
+    if (formErrors[fieldName].length > 0) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        key: i
+      }, fieldName, " ", formErrors[fieldName]);
+    } else {
+      return "";
+    }
+  }));
+};
 
 /***/ }),
 
@@ -51852,9 +51882,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Login", function() { return Login; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Login_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Login.css */ "./resources/js/components/Login.css");
-/* harmony import */ var _Login_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Login_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _FormErrors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormErrors */ "./resources/js/components/FormErrors.js");
+/* harmony import */ var _Login_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Login.css */ "./resources/js/components/Login.css");
+/* harmony import */ var _Login_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Login_css__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -51864,13 +51897,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -51879,15 +51913,123 @@ var Login =
 function (_Component) {
   _inherits(Login, _Component);
 
-  function Login() {
+  function Login(props) {
+    var _this;
+
     _classCallCheck(this, Login);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Login).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this, props));
+    _this.state = {
+      email: "",
+      password: "",
+      formErrors: {
+        email: "",
+        password: ""
+      },
+      emailValid: false,
+      passwordValid: false,
+      formValid: false
+    };
+    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
+    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Login, [{
+    key: "isValid",
+    value: function (_isValid) {
+      function isValid() {
+        return _isValid.apply(this, arguments);
+      }
+
+      isValid.toString = function () {
+        return _isValid.toString();
+      };
+
+      return isValid;
+    }(function () {
+      if (!this.state.email) {
+        errors.email = 'Заповніть поле "Емайл"';
+      }
+
+      if (!this.state.password) {
+        errors.password = 'Заповніть поле "Пароль"';
+      }
+
+      this.setState({
+        errors: errors
+      });
+      return isValid;
+    })
+  }, {
+    key: "onSubmit",
+    value: function onSubmit(e) {
+      e.preventDefault();
+
+      if (this.isValid()) {
+        this.setState({
+          errors: {}
+        });
+        console.log("isvalid", this.isValid);
+      } // else {
+      //     var data=e.response.data;
+      //     this.setState({ errors: data.errors}) ;
+      // }
+
+    }
+  }, {
+    key: "validateField",
+    value: function validateField(fieldName, value) {
+      var fieldValidationErrors = this.state.formErrors;
+      var emailValid = this.state.emailValid;
+      var passwordValid = this.state.passwordValid;
+
+      switch (fieldName) {
+        case "email":
+          emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+          fieldValidationErrors.email = emailValid ? "" : " is invalid";
+          break;
+
+        case "password":
+          passwordValid = value.length >= 6;
+          fieldValidationErrors.password = passwordValid ? "" : " is too short";
+          break;
+
+        default:
+          break;
+      }
+
+      this.setState({
+        formErrors: fieldValidationErrors,
+        emailValid: emailValid,
+        passwordValid: passwordValid
+      }, this.validateForm);
+    }
+  }, {
+    key: "validateForm",
+    value: function validateForm() {
+      this.setState({
+        formValid: this.state.emailValid && this.state.passwordValid
+      });
+    }
+  }, {
+    key: "onChange",
+    value: function onChange(e) {
+      var _this2 = this;
+
+      var name = e.target.name;
+      var value = e.target.value;
+      this.setState(_defineProperty({}, name, value), function () {
+        _this2.validateField(name, value);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this$state = this.state,
+          email = _this$state.email,
+          password = _this$state.password,
+          errors = _this$state.errors;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -51916,8 +52058,11 @@ function (_Component) {
         className: "fas fa-user"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
+        name: "email",
         className: "form-control",
-        placeholder: "username"
+        placeholder: "username",
+        value: email,
+        onChange: this.onChange
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -51928,8 +52073,11 @@ function (_Component) {
         className: "fas fa-key"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
+        name: "password",
         className: "form-control",
-        placeholder: "password"
+        placeholder: "password",
+        onChange: this.onChange,
+        value: password
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row align-items-center remember"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -51940,7 +52088,16 @@ function (_Component) {
         type: "submit",
         value: "Login",
         className: "btn float-right login_btn"
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        value: "Login",
+        className: "btn float-right login_btn",
+        disabled: !this.state.formValid
+      }, "Sign up")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "panel panel-default"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormErrors__WEBPACK_IMPORTED_MODULE_1__["FormErrors"], {
+        formErrors: this.state.formErrors
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-flex justify-content-center links"
@@ -52039,48 +52196,48 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "container register-form"
+        className: "container register-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "form"
+        className: "form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "form-content"
+        className: "form-content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "row"
+        className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "col-md-6"
+        className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "form-group"
+        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        "class": "form-control",
+        className: "form-control",
         placeholder: "Your Name *",
         value: ""
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "form-group"
+        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        "class": "form-control",
+        className: "form-control",
         placeholder: "Phone Number *",
         value: ""
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "col-md-6"
+        className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "form-group"
+        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        "class": "form-control",
+        className: "form-control",
         placeholder: "Your Password *",
         value: ""
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "form-group"
+        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        "class": "form-control",
+        className: "form-control",
         placeholder: "Confirm Password *",
         value: ""
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        "class": "btnSubmit"
+        className: "btnSubmit"
       }, "Submit")))));
     }
   }]);

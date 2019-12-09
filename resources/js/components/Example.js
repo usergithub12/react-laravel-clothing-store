@@ -9,7 +9,7 @@ export default class Example extends Component {
             <Fragment>
                 <h1>laravel-react</h1>;
                 <Login />
-                <Registration />
+                {/* <Registration /> */}
             </Fragment>
         );
     }
