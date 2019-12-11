@@ -61368,7 +61368,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "nav-link",
         to: "/login"
-      }, "Login")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      }, "\u0412\u0445\u0456\u0434")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "nav-link disabled",
@@ -61576,7 +61576,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card"
+        className: "card  bg-light"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "\u0412\u0445\u0456\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -61738,6 +61738,12 @@ function (_Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_this), "onChangeFile", function (event) {
+      _this.setState({
+        image: URL.createObjectURL(event.target.files[0])
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "onChange", function (date) {
       return _this.setState({
         dateOfBirth: date
@@ -61764,7 +61770,7 @@ function (_Component) {
       if (passwordConfirm === "") errors.passwordConfirm = "Поле не може бути пустим!";
       if (password != passwordConfirm) errors.passwordConfirm = "Паролі не співпадають!";
       if (dateOfBirth === "") errors.dateOfBirth = "Оберіть дату!";
-      if (image === "") errors.image = "Оберіть фото!";
+      if (image === "") errors.image = "Фото не обрано!";
       if (phone === "") errors.phone = "Поле не може бути пустим!";
       var isValid = Object.keys(errors).length === 0;
 
@@ -61794,7 +61800,7 @@ function (_Component) {
       console.log("Regiter page state", this.state);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "d-flex justify-content-center"
-      }, "Register page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "\u0420\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         name: "form",
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -61825,15 +61831,36 @@ function (_Component) {
         label: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F",
         value: dateOfBirth.toLocaleDateString(),
         error: errors.dateOfBirth,
-        onChange: this.handleChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        field: "Image",
-        label: "\u0424\u043E\u0442\u043E",
-        value: image,
-        error: errors.image,
         onChange: this.handleChange,
-        type: "file"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_input_mask__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        readOnly: true
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "image"
+      }, "\u0424\u043E\u0442\u043E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "custom-file"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "image",
+        id: "image",
+        type: "file",
+        onChange: this.onChangeFile,
+        className: classnames__WEBPACK_IMPORTED_MODULE_4___default()("form-control custom-file-input", {
+          "is-invalid": !!errors.image
+        })
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "custom-file-label",
+        htmlFor: "image"
+      }, "\u041E\u0431\u0435\u0440\u0456\u0442\u044C \u0444\u043E\u0442\u043E")), !!errors.image && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "invalid-feedback"
+      }, errors.image), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        id: "prev",
+        src: image
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "phone"
+      }, "\u0422\u0435\u043B\u0435\u0444\u043E\u043D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_input_mask__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        id: "phone",
         name: "phone",
         value: phone,
         onChange: this.handleChange,
@@ -61844,7 +61871,7 @@ function (_Component) {
         })
       }), !!errors.phone && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "invalid-feedback"
-      }, errors.phone), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, errors.phone)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary"

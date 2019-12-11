@@ -29,6 +29,11 @@ export class RegisterPage extends Component {
             this.setState({ [name]: value });
         }
     };
+    onChangeFile = event => {
+        this.setState({
+            image: URL.createObjectURL(event.target.files[0])
+        });
+    };
 
     onChange = date => this.setState({ dateOfBirth: date });
 
@@ -56,7 +61,7 @@ export class RegisterPage extends Component {
         if (password != passwordConfirm)
             errors.passwordConfirm = "Паролі не співпадають!";
         if (dateOfBirth === "") errors.dateOfBirth = "Оберіть дату!";
-        if (image === "") errors.image = "Оберіть фото!";
+        if (image === "") errors.image = "Фото не обрано!";
         if (phone === "") errors.phone = "Поле не може бути пустим!";
         const isValid = Object.keys(errors).length === 0;
         if (isValid) {
@@ -80,7 +85,7 @@ export class RegisterPage extends Component {
         console.log("Regiter page state", this.state);
         return (
             <>
-                <h1 className="d-flex justify-content-center">Register page</h1>
+                <h1 className="d-flex justify-content-center">Реєстрація</h1>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <TextFieldGroup
                         field="email"
@@ -112,30 +117,67 @@ export class RegisterPage extends Component {
                         value={dateOfBirth.toLocaleDateString()}
                         error={errors.dateOfBirth}
                         onChange={this.handleChange}
+                        readOnly
                     />
 
-                    <TextFieldGroup
+                    {/* <TextFieldGroup
                         field="Image"
                         label="Фото"
                         value={image}
                         error={errors.image}
-                        onChange={this.handleChange}
+                        onChange={this.onChangeFile}
                         type="file"
-                    />
+                    /> */}
+                    <div className="form-group">
+                        <label htmlFor="image">Фото</label>
+                        <div className="custom-file">
+                            <input
+                                name="image"
+                                id="image"
+                                type="file"
+                                onChange={this.onChangeFile}
+                                className={classnames(
+                                    "form-control custom-file-input",
+                                    {
+                                        "is-invalid": !!errors.image
+                                    }
+                                )}
+                            />
+                            <label
+                                className="custom-file-label"
+                                htmlFor="image"
+                            >
+                                Оберіть фото
+                            </label>
+                        </div>
+                        {!!errors.image && (
+                            <div className="invalid-feedback">
+                                {errors.image}
+                            </div>
+                        )}
+                        <img id="prev" src={image} />
+                    </div>
 
-                    <InputMask
-                        name="phone"
-                        value={phone}
-                        onChange={this.handleChange}
-                        mask="+38 (099) 999-99-99"
-                        maskChar=" "
-                        className={classnames("form-control", {
-                            "is-invalid": !!errors.phone
-                        })}
-                    />
-                    {!!errors.phone && (
-                        <div className="invalid-feedback">{errors.phone}</div>
-                    )}
+                    <div className="form-group">
+                        <label htmlFor="phone">Телефон</label>
+                        <InputMask
+                            id="phone"
+                            name="phone"
+                            value={phone}
+                            onChange={this.handleChange}
+                            mask="+38 (099) 999-99-99"
+                            maskChar=" "
+                            className={classnames("form-control", {
+                                "is-invalid": !!errors.phone
+                            })}
+                        />
+                        {!!errors.phone && (
+                            <div className="invalid-feedback">
+                                {errors.phone}
+                            </div>
+                        )}
+                    </div>
+
                     <div className="form-group">
                         <button className="btn btn-primary">
                             Зареєструватися

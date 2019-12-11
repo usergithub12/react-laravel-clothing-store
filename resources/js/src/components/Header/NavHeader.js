@@ -34,7 +34,7 @@ export class NavHeader extends Component {
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/login">
-                                Login
+                                Вхід
                             </Link>
                         </li>
                         <li className="nav-item">
