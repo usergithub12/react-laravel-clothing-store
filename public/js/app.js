@@ -61721,8 +61721,25 @@ function (_Component) {
       dateOfBirth: new Date(),
       image: "",
       phone: "",
+      focus: false,
       errors: {//email: 'Invalid'
       }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInputFocus", function () {
+      console.log("qwe");
+
+      _this.setState({
+        focus: true
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInputBlur", function () {
+      console.log("qwe");
+
+      _this.setState({
+        focus: false
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "setStateByErrors", function (name, value) {
@@ -61746,7 +61763,8 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "onChange", function (date) {
       return _this.setState({
-        dateOfBirth: date
+        dateOfBirth: date,
+        focus: false
       });
     });
 
@@ -61796,8 +61814,10 @@ function (_Component) {
           passwordConfirm = _this$state2.passwordConfirm,
           image = _this$state2.image,
           phone = _this$state2.phone,
-          errors = _this$state2.errors;
+          errors = _this$state2.errors,
+          focus = _this$state2.focus;
       console.log("Regiter page state", this.state);
+      console.log("focus", focus);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "d-flex justify-content-center"
       }, "\u0420\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -61823,17 +61843,18 @@ function (_Component) {
         error: errors.passwordConfirm,
         onChange: this.handleChange,
         type: "password"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_calendar__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        onChange: this.onChange,
-        value: dateOfBirth
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
         field: "dateOfBirth",
         label: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F",
         value: dateOfBirth.toLocaleDateString(),
         error: errors.dateOfBirth,
         onChange: this.handleChange,
-        readOnly: true
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onFocus: this.handleInputFocus //  onBlur={this.handleInputBlur}  
+
+      }), focus ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_calendar__WEBPACK_IMPORTED_MODULE_2___default.a, {
+        onChange: this.onChange,
+        value: dateOfBirth
+      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "image"
@@ -61850,9 +61871,9 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "custom-file-label",
         htmlFor: "image"
-      }, "\u041E\u0431\u0435\u0440\u0456\u0442\u044C \u0444\u043E\u0442\u043E")), !!errors.image && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "\u041E\u0431\u0435\u0440\u0456\u0442\u044C \u0444\u043E\u0442\u043E"), !!errors.image && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "invalid-feedback"
-      }, errors.image), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, errors.image)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         id: "prev",
         src: image
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -61926,6 +61947,8 @@ var TextFieldGroup = function TextFieldGroup(_ref) {
       error = _ref.error,
       type = _ref.type,
       onChange = _ref.onChange,
+      onFocus = _ref.onFocus,
+      onBlur = _ref.onBlur,
       checkUserExists = _ref.checkUserExists;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
@@ -61933,7 +61956,8 @@ var TextFieldGroup = function TextFieldGroup(_ref) {
     htmlFor: field
   }, label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     onChange: onChange,
-    onBlur: checkUserExists,
+    onBlur: onBlur,
+    onFocus: onFocus,
     value: value,
     type: type,
     id: field,
@@ -61952,8 +61976,10 @@ TextFieldGroup.propTypes = {
   label: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
   error: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
   type: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  onChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
-  checkUserExists: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  checkUserExists: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  onBlur: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  onFocus: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
 };
 TextFieldGroup.defaultProps = {
   type: "text"

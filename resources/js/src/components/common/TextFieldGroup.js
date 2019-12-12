@@ -9,6 +9,8 @@ const TextFieldGroup = ({
     error,
     type,
     onChange,
+    onFocus,
+    onBlur,
     checkUserExists
 }) => {
     return (
@@ -16,7 +18,8 @@ const TextFieldGroup = ({
             <label htmlFor={field}>{label}</label>
             <input
                 onChange={onChange}
-                onBlur={checkUserExists}
+                onBlur={onBlur}
+                onFocus={onFocus}
                 value={value}
                 type={type}
                 id={field}
@@ -37,8 +40,10 @@ TextFieldGroup.propTypes = {
     label: PropTypes.string.isRequired,
     error: PropTypes.string,
     type: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    checkUserExists: PropTypes.func
+    onChange: PropTypes.func,
+    checkUserExists: PropTypes.func,
+    onBlur:PropTypes.func,
+    onFocus:PropTypes.func
 };
 
 TextFieldGroup.defaultProps = {
