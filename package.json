@@ -30,6 +30,7 @@
         "prop-types": "^15.7.2",
         "react-calendar": "^2.19.2",
         "react-input-mask": "^2.0.4",
+        "react-numeric-captcha": "^1.0.3",
         "react-router-dom": "^5.1.2"
     }
 }

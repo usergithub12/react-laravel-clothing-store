@@ -3,6 +3,9 @@ import TextFieldGroup from "../../common/TextFieldGroup";
 import Calendar from "react-calendar";
 import InputMask from "react-input-mask";
 import classnames from "classnames";
+import Captcha from "react-numeric-captcha";
+
+import "./captcha.css";
 
 export class RegisterPage extends Component {
     state = {
@@ -12,20 +15,21 @@ export class RegisterPage extends Component {
         dateOfBirth: new Date(),
         image: "",
         phone: "",
-        focus:false,
+        focus: false,
         errors: {
             //email: 'Invalid'
-        }
+        },
+        captchaSuccess: false
     };
     handleInputFocus = () => {
         console.log("qwe");
         this.setState({ focus: true });
-      };
-    
-      handleInputBlur = () => {
+    };
+
+    handleInputBlur = () => {
         console.log("qwe");
         this.setState({ focus: false });
-      };
+    };
 
     setStateByErrors = (name, value) => {
         if (!!this.state.errors[name]) {
@@ -45,7 +49,7 @@ export class RegisterPage extends Component {
         });
     };
 
-    onChange = date => this.setState({ dateOfBirth: date,focus: false  });
+    onChange = date => this.setState({ dateOfBirth: date, focus: false });
 
     handleChange = e => {
         this.setStateByErrors(e.target.name, e.target.value);
@@ -91,10 +95,11 @@ export class RegisterPage extends Component {
             image,
             phone,
             errors,
-            focus
+            focus,
+            captchaSuccess
         } = this.state;
         console.log("Regiter page state", this.state);
-        console.log("focus",focus);
+        console.log("focus", focus);
         return (
             <>
                 <h1 className="d-flex justify-content-center">Реєстрація</h1>
@@ -122,20 +127,24 @@ export class RegisterPage extends Component {
                         onChange={this.handleChange}
                         type="password"
                     />
-                   
-                     <TextFieldGroup
-              
+
+                    <TextFieldGroup
                         field="dateOfBirth"
                         label="Дата народження"
                         value={dateOfBirth.toLocaleDateString()}
                         error={errors.dateOfBirth}
                         onChange={this.handleChange}
                         onFocus={this.handleInputFocus}
-                        //  onBlur={this.handleInputBlur}  
-                    /> 
+                        //  onBlur={this.handleInputBlur}
+                    />
 
- {focus ? <Calendar  onChange={this.onChange} value={dateOfBirth} /> : null}
- {/* {!!focus && (<Calendar  onChange={this.onChange} value={dateOfBirth} /> )} */}
+                    {focus ? (
+                        <Calendar
+                            onChange={this.onChange}
+                            value={dateOfBirth}
+                        />
+                    ) : null}
+                    {/* {!!focus && (<Calendar  onChange={this.onChange} value={dateOfBirth} /> )} */}
 
                     {/* <TextFieldGroup
                         field="Image"
@@ -167,12 +176,12 @@ export class RegisterPage extends Component {
                                 Оберіть фото
                             </label>
                             {!!errors.image && (
-                            <div className="invalid-feedback">
-                                {errors.image}
-                            </div>
-                        )}
+                                <div className="invalid-feedback">
+                                    {errors.image}
+                                </div>
+                            )}
                         </div>
-                       
+
                         <img id="prev" src={image} />
                     </div>
 
@@ -196,8 +205,16 @@ export class RegisterPage extends Component {
                         )}
                     </div>
 
+                    <Captcha
+                        onChange={status =>
+                            this.setState({ captchaSuccess: status })
+                        }
+                    />
                     <div className="form-group">
-                        <button className="btn btn-primary">
+                        <button
+                            className="btn btn-primary"
+                            disabled={!captchaSuccess}
+                        >
                             Зареєструватися
                         </button>
                     </div>
