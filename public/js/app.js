@@ -61515,7 +61515,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/TextFieldGroup */ "./resources/js/src/components/common/TextFieldGroup.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -61539,6 +61541,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var Login =
 /*#__PURE__*/
 function (_Component) {
@@ -61550,6 +61553,20 @@ function (_Component) {
     _classCallCheck(this, Login);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "checkUserExists", function () {
+      var email = _this.state.email; // axios.get(`/api/user`, { email }).then(res => {
+      //     console.log(res);
+      // });
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("user?email=" + {
+        email: email
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    });
 
     _defineProperty(_assertThisInitialized(_this), "setStateByErrors", function (name, value) {
       if (!!_this.state.errors[name]) {
@@ -61631,7 +61648,8 @@ function (_Component) {
         label: "\u0415\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430 \u043F\u043E\u0448\u0442\u0430",
         value: email,
         error: errors.email,
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        onBlur: this.checkUserExists
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -61652,7 +61670,7 @@ function (_Component) {
         className: "card-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-flex justify-content-center links"
-      }, "\u041D\u0435 \u0437\u0430\u0440\u0435\u0454\u0441\u0442\u0440\u043E\u0432\u0430\u043D\u0456?", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      }, "\u041D\u0435 \u0437\u0430\u0440\u0435\u0454\u0441\u0442\u0440\u043E\u0432\u0430\u043D\u0456?", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
         className: "nav-link",
         to: "/register"
       }, "\u0420\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u044F")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -62055,7 +62073,7 @@ TextFieldGroup.propTypes = {
   label: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
   error: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
   type: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  onChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
   checkUserExists: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
   onBlur: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
   onFocus: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func

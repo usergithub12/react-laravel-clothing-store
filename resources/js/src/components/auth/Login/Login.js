@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import TextFieldGroup from "../../common/TextFieldGroup";
-
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 export class Login extends Component {
@@ -12,6 +12,21 @@ export class Login extends Component {
             errors: {}
         };
     }
+    checkUserExists = () => {
+        const { email } = this.state;
+        // axios.get(`/api/user`, { email }).then(res => {
+        //     console.log(res);
+        // });
+        axios
+            .get("user?email=" + { email })
+            .then(function(response) {
+                console.log(response);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    };
+
     setStateByErrors = (name, value) => {
         if (!!this.state.errors[name]) {
             let errors = Object.assign({}, this.state.errors);
@@ -82,6 +97,7 @@ export class Login extends Component {
                                                 value={email}
                                                 error={errors.email}
                                                 onChange={this.handleChange}
+                                                onBlur={this.checkUserExists}
                                             />
                                         </div>
                                         <div className="input-group form-group">

@@ -14,4 +14,6 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+ Route::get('user/{email}', 'UserController@CheckIfUserExists');
 Route::view('/{path?}', 'app');
