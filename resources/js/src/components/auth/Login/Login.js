@@ -14,16 +14,31 @@ export class Login extends Component {
     }
     checkUserExists = () => {
         const { email } = this.state;
-        // axios.get(`/api/user`, { email }).then(res => {
-        //     console.log(res);
-        // });
-        axios
-            .get("user?email=" + { email })
+        // axios
+        //     .post("/api/userexists", {
+        //         email: email
+        //     })
+        //     .then(function(response) {
+        //         console.log(response);
+        //     })
+        //     .catch(function(error) {
+        //         console.log(error);
+        //     });
+        var bodyFormData = new FormData();
+        bodyFormData.set("email", email);
+        axios({
+            method: "post",
+            url: "/api/userexists",
+            data: bodyFormData,
+            headers: { "Content-Type": "multipart/form-data" }
+        })
             .then(function(response) {
+                //handle success
                 console.log(response);
             })
-            .catch(function(error) {
-                console.log(error);
+            .catch(function(response) {
+                //handle error
+                console.log(response);
             });
     };
 

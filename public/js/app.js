@@ -61555,16 +61555,32 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this, props));
 
     _defineProperty(_assertThisInitialized(_this), "checkUserExists", function () {
-      var email = _this.state.email; // axios.get(`/api/user`, { email }).then(res => {
-      //     console.log(res);
-      // });
+      var email = _this.state.email; // axios
+      //     .post("/api/userexists", {
+      //         email: email
+      //     })
+      //     .then(function(response) {
+      //         console.log(response);
+      //     })
+      //     .catch(function(error) {
+      //         console.log(error);
+      //     });
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("user?email=" + {
-        email: email
+      var bodyFormData = new FormData();
+      bodyFormData.set("email", email);
+      axios__WEBPACK_IMPORTED_MODULE_2___default()({
+        method: "post",
+        url: "/api/userexists",
+        data: bodyFormData,
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       }).then(function (response) {
+        //handle success
         console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
+      })["catch"](function (response) {
+        //handle error
+        console.log(response);
       });
     });
 
