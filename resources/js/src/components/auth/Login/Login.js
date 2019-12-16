@@ -112,7 +112,6 @@ export class Login extends Component {
                                                 value={email}
                                                 error={errors.email}
                                                 onChange={this.handleChange}
-                                                onBlur={this.checkUserExists}
                                             />
                                         </div>
                                         <div className="input-group form-group">

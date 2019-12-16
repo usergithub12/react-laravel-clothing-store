@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import InputMask from "react-input-mask";
 import classnames from "classnames";
 import Captcha from "react-numeric-captcha";
-
+import axios from "axios";
 import "./captcha.css";
 
 export class RegisterPage extends Component {
@@ -47,6 +47,38 @@ export class RegisterPage extends Component {
         this.setState({
             image: URL.createObjectURL(event.target.files[0])
         });
+    };
+
+    checkUserExists = e => {
+        const { email } = this.state;
+
+        let errors = {};
+
+        var bodyFormData = new FormData();
+        bodyFormData.set("email", email);
+        axios({
+            method: "post",
+            url: "/api/userexists",
+            data: bodyFormData,
+            headers: { "Content-Type": "multipart/form-data" }
+        })
+            .then(function(response) {
+                //handle success
+
+                errors.email = "Користувач з такою поштою вже зараєстрований!";
+                console.log("errors from check axios", errors);
+                console.log(response);
+            })
+            .catch(function(response) {
+                //handle error
+
+                console.log(response);
+            });
+        // const isValid = Object.keys(errors).length === 0;
+        console.log("errors after axios", errors);
+        this.setState({ errors });
+        // setStateByErrors(email, email);
+        console.log("errors STATE", this.state);
     };
 
     onChange = date => this.setState({ dateOfBirth: date, focus: false });
@@ -110,6 +142,7 @@ export class RegisterPage extends Component {
                         value={email}
                         error={errors.email}
                         onChange={this.handleChange}
+                        onBlur={this.checkUserExists}
                     />
                     <TextFieldGroup
                         field="password"

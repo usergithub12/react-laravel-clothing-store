@@ -61664,8 +61664,7 @@ function (_Component) {
         label: "\u0415\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430 \u043F\u043E\u0448\u0442\u0430",
         value: email,
         error: errors.email,
-        onChange: this.handleChange,
-        onBlur: this.checkUserExists
+        onChange: this.handleChange
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -61739,8 +61738,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_numeric_captcha__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-numeric-captcha */ "./node_modules/react-numeric-captcha/dist/captcha.js");
 /* harmony import */ var react_numeric_captcha__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_numeric_captcha__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _captcha_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./captcha.css */ "./resources/js/src/components/auth/Register/captcha.css");
-/* harmony import */ var _captcha_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_captcha_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _captcha_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./captcha.css */ "./resources/js/src/components/auth/Register/captcha.css");
+/* harmony import */ var _captcha_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_captcha_css__WEBPACK_IMPORTED_MODULE_7__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -61760,6 +61761,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -61834,6 +61836,38 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "checkUserExists", function (e) {
+      var email = _this.state.email;
+      var errors = {};
+      var bodyFormData = new FormData();
+      bodyFormData.set("email", email);
+      axios__WEBPACK_IMPORTED_MODULE_6___default()({
+        method: "post",
+        url: "/api/userexists",
+        data: bodyFormData,
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(function (response) {
+        //handle success
+        errors.email = "Користувач з такою поштою вже зараєстрований!";
+        console.log("errors from check axios", errors);
+        console.log(response);
+      })["catch"](function (response) {
+        //handle error
+        console.log(response);
+      }); // const isValid = Object.keys(errors).length === 0;
+
+      console.log("errors after axios", errors);
+
+      _this.setState({
+        errors: errors
+      }); // setStateByErrors(email, email);
+
+
+      console.log("errors STATE", _this.state);
+    });
+
     _defineProperty(_assertThisInitialized(_this), "onChange", function (date) {
       return _this.setState({
         dateOfBirth: date,
@@ -61904,7 +61938,8 @@ function (_Component) {
         label: "\u0415\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430 \u043F\u043E\u0448\u0442\u0430",
         value: email,
         error: errors.email,
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        onBlur: this.checkUserExists
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
         field: "password",
         label: "\u041F\u0430\u0440\u043E\u043B\u044C",
