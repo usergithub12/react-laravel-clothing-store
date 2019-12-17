@@ -113,6 +113,25 @@ export class RegisterPage extends Component {
         if (isValid) {
             console.log("Model is Valid");
             //ajax axios post
+            var bodyFormData = new FormData();
+            bodyFormData.set("name", email);
+            bodyFormData.set("email", email);
+            bodyFormData.set("password", password);
+            axios({
+                method: "post",
+                url: "/api/register",
+                data: bodyFormData,
+                headers: { "Content-Type": "multipart/form-data" }
+            })
+                .then(function(response) {
+                    //handle success
+                    console.log(response);
+                })
+                .catch(function(response) {
+                    //handle error
+
+                    console.log(response);
+                });
         } else {
             this.setState({ errors });
         }

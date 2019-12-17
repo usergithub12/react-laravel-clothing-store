@@ -61555,17 +61555,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this, props));
 
     _defineProperty(_assertThisInitialized(_this), "checkUserExists", function () {
-      var email = _this.state.email; // axios
-      //     .post("/api/userexists", {
-      //         email: email
-      //     })
-      //     .then(function(response) {
-      //         console.log(response);
-      //     })
-      //     .catch(function(error) {
-      //         console.log(error);
-      //     });
-
+      var email = _this.state.email;
       var bodyFormData = new FormData();
       bodyFormData.set("email", email);
       axios__WEBPACK_IMPORTED_MODULE_2___default()({
@@ -61577,6 +61567,10 @@ function (_Component) {
         }
       }).then(function (response) {
         //handle success
+        _this.setState({
+          isSignedUp: true
+        });
+
         console.log(response);
       })["catch"](function (response) {
         //handle error
@@ -61613,7 +61607,28 @@ function (_Component) {
       var isValid = Object.keys(errors).length === 0;
 
       if (isValid) {
-        console.log("Model is Valid"); //ajax axios post
+        console.log("Model is Valid");
+        var bodyFormData = new FormData();
+        bodyFormData.set("email", email);
+        bodyFormData.set("password", password);
+        axios__WEBPACK_IMPORTED_MODULE_2___default()({
+          method: "post",
+          url: "/api/login",
+          data: bodyFormData,
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        }).then(function (response) {
+          // history.push("/");
+          _this.setState({
+            isSignedUp: true
+          });
+
+          console.log(response);
+        })["catch"](function (response) {
+          //handle error
+          console.log(response);
+        }); //ajax axios post
       } else {
         _this.setState({
           errors: errors
@@ -61624,7 +61639,8 @@ function (_Component) {
     _this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: {},
+      isSignedUp: false
     };
     return _this;
   }
@@ -61635,7 +61651,18 @@ function (_Component) {
       var _this$state2 = this.state,
           email = _this$state2.email,
           password = _this$state2.password,
-          errors = _this$state2.errors;
+          errors = _this$state2.errors,
+          isSignedUp = _this$state2.isSignedUp;
+
+      if (isSignedUp) {
+        // redirect to home if signed up
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
+          to: {
+            pathname: "/"
+          }
+        });
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -61901,6 +61928,25 @@ function (_Component) {
 
       if (isValid) {
         console.log("Model is Valid"); //ajax axios post
+
+        var bodyFormData = new FormData();
+        bodyFormData.set("name", email);
+        bodyFormData.set("email", email);
+        bodyFormData.set("password", password);
+        axios__WEBPACK_IMPORTED_MODULE_6___default()({
+          method: "post",
+          url: "/api/register",
+          data: bodyFormData,
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        }).then(function (response) {
+          //handle success
+          console.log(response);
+        })["catch"](function (response) {
+          //handle error
+          console.log(response);
+        });
       } else {
         _this.setState({
           errors: errors

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import TextFieldGroup from "../../common/TextFieldGroup";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export class Login extends Component {
     constructor(props) {
@@ -9,21 +9,13 @@ export class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            errors: {}
+            errors: {},
+            isSignedUp: false
         };
     }
     checkUserExists = () => {
         const { email } = this.state;
-        // axios
-        //     .post("/api/userexists", {
-        //         email: email
-        //     })
-        //     .then(function(response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function(error) {
-        //         console.log(error);
-        //     });
+
         var bodyFormData = new FormData();
         bodyFormData.set("email", email);
         axios({
@@ -32,11 +24,12 @@ export class Login extends Component {
             data: bodyFormData,
             headers: { "Content-Type": "multipart/form-data" }
         })
-            .then(function(response) {
+            .then(response => {
                 //handle success
+                this.setState({ isSignedUp: true });
                 console.log(response);
             })
-            .catch(function(response) {
+            .catch(response => {
                 //handle error
                 console.log(response);
             });
@@ -71,6 +64,25 @@ export class Login extends Component {
         const isValid = Object.keys(errors).length === 0;
         if (isValid) {
             console.log("Model is Valid");
+            var bodyFormData = new FormData();
+            bodyFormData.set("email", email);
+            bodyFormData.set("password", password);
+            axios({
+                method: "post",
+                url: "/api/login",
+                data: bodyFormData,
+                headers: { "Content-Type": "multipart/form-data" }
+            })
+                .then(response => {
+                    // history.push("/");
+                    this.setState({ isSignedUp: true });
+                    console.log(response);
+                })
+                .catch(response => {
+                    //handle error
+
+                    console.log(response);
+                });
             //ajax axios post
         } else {
             this.setState({ errors });
@@ -78,7 +90,11 @@ export class Login extends Component {
     };
 
     render() {
-        const { email, password, errors } = this.state;
+        const { email, password, errors, isSignedUp } = this.state;
+        if (isSignedUp) {
+            // redirect to home if signed up
+            return <Redirect to={{ pathname: "/" }} />;
+        }
         return (
             <div>
                 <Fragment>

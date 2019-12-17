@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 // import Header from './Header'
-import RegisterPage from './components/auth/Register';
-import Login from './components/auth/Login';
+import RegisterPage from "./components/auth/Register";
+import Login from "./components/auth/Login";
 import NavHeader from "./components/Header";
 import HomePage from "./components/Home";
 
@@ -22,7 +22,7 @@ class App extends Component {
                     <Route exact path="/register">
                         <RegisterPage />
                     </Route>
-                      <Route exact path="/login">
+                    <Route exact path="/login">
                         <Login />
                     </Route>
                 </div>
