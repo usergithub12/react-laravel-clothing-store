@@ -6,6 +6,10 @@ import classnames from "classnames";
 import Captcha from "react-numeric-captcha";
 import axios from "axios";
 import "./captcha.css";
+import FileUploadComponent from "../../common/FileUploadComponent";
+
+import Cropper from "react-cropper";
+import "cropperjs/dist/cropper.css";
 
 export class RegisterPage extends Component {
     state = {
@@ -43,10 +47,27 @@ export class RegisterPage extends Component {
             this.setState({ [name]: value });
         }
     };
-    onChangeFile = event => {
-        this.setState({
-            image: URL.createObjectURL(event.target.files[0])
-        });
+    onChangeFile = e => {
+        let files = e.target.files || e.dataTransfer.files;
+        if (!files.length) return;
+        let file = files[0];
+        this.createImage(file);
+    };
+    createImage = file => {
+        let reader = new FileReader();
+        reader.onload = e => {
+            this.setState({
+                image: e.target.result
+            });
+        };
+        reader.readAsDataURL(file);
+    };
+    fileUpload = image => {
+        const url = "api/fileupload";
+        const formData = { file: image };
+        return axios
+            .post(url, formData)
+            .then(response => console.log(response));
     };
 
     checkUserExists = e => {
@@ -65,7 +86,7 @@ export class RegisterPage extends Component {
             .then(function(response) {
                 //handle success
 
-                errors.email = "Користувач з такою поштою вже зараєстрований!";
+                errors.email = "Користувач з такою поштою вже зареєстрований!";
                 console.log("errors from check axios", errors);
                 console.log(response);
             })
@@ -132,6 +153,8 @@ export class RegisterPage extends Component {
 
                     console.log(response);
                 });
+
+            this.fileUpload(image);
         } else {
             this.setState({ errors });
         }
@@ -196,46 +219,16 @@ export class RegisterPage extends Component {
                             value={dateOfBirth}
                         />
                     ) : null}
-                    {/* {!!focus && (<Calendar  onChange={this.onChange} value={dateOfBirth} /> )} */}
 
-                    {/* <TextFieldGroup
-                        field="Image"
+                    <FileUploadComponent
+                        field="Фото"
                         label="Фото"
-                        value={image}
                         error={errors.image}
+                        message={image}
                         onChange={this.onChangeFile}
                         type="file"
-                    /> */}
-                    <div className="form-group">
-                        <label htmlFor="image">Фото</label>
-                        <div className="custom-file">
-                            <input
-                                name="image"
-                                id="image"
-                                type="file"
-                                onChange={this.onChangeFile}
-                                className={classnames(
-                                    "form-control custom-file-input",
-                                    {
-                                        "is-invalid": !!errors.image
-                                    }
-                                )}
-                            />
-                            <label
-                                className="custom-file-label"
-                                htmlFor="image"
-                            >
-                                Оберіть фото
-                            </label>
-                            {!!errors.image && (
-                                <div className="invalid-feedback">
-                                    {errors.image}
-                                </div>
-                            )}
-                        </div>
-
-                        <img id="prev" src={image} />
-                    </div>
+                    />
+                    <img id="prev" src={image} />
 
                     <div className="form-group">
                         <label htmlFor="phone">Телефон</label>
