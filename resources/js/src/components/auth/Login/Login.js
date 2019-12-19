@@ -105,13 +105,22 @@ export class Login extends Component {
                                     <h3>Вхід</h3>
                                     <div className="d-flex justify-content-end social_icon">
                                         <span>
-                                            <i className="fab fa-facebook-square"></i>
+                                            <i
+                                                className="fa fa-facebook-official"
+                                                aria-hidden="true"
+                                            ></i>
                                         </span>
                                         <span>
-                                            <i className="fab fa-google-plus-square"></i>
+                                            <i
+                                                className="fa fa-google-plus-official"
+                                                aria-hidden="true"
+                                            ></i>
                                         </span>
                                         <span>
-                                            <i className="fab fa-twitter-square"></i>
+                                            <i
+                                                className="fa fa-twitter"
+                                                aria-hidden="true"
+                                            ></i>
                                         </span>
                                     </div>
                                 </div>

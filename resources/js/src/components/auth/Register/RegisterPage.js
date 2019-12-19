@@ -7,6 +7,12 @@ import Captcha from "react-numeric-captcha";
 import axios from "axios";
 import "./captcha.css";
 import CropperModal from "../../common/cropper/CropperModal";
+import Img from "react-image";
+// import Imgloader from "../../common/img-loader/imgloader";
+
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import ChangingProgressProvider from "../../common/img-loader/ChangingProgressProvider";
+import "react-circular-progressbar/dist/styles.css";
 
 export class RegisterPage extends Component {
     state = {
@@ -14,14 +20,14 @@ export class RegisterPage extends Component {
         password: "",
         passwordConfirm: "",
         dateOfBirth: new Date(),
-        image:
-            "http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png",
+        image: "",
         phone: "",
         focus: false,
         errors: {
             //email: 'Invalid'
         },
-        captchaSuccess: false
+        captchaSuccess: false,
+        percentage: 0
     };
     handleInputFocus = () => {
         console.log("qwe");
@@ -169,7 +175,8 @@ export class RegisterPage extends Component {
             phone,
             errors,
             focus,
-            captchaSuccess
+            captchaSuccess,
+            percentage
         } = this.state;
         console.log("Regiter page state", this.state);
         console.log("focus", focus);
@@ -225,13 +232,43 @@ export class RegisterPage extends Component {
                             value={dateOfBirth}
                         />
                     ) : null}
+                    <div className="container">
+                        <div className="d-flex justify-content-center">
+                            <div className="w-40">
+                                <Img
+                                    width="300"
+                                    src={image}
+                                    // loader={<Imgloader />}
+                                    loader={
+                                        <ChangingProgressProvider
+                                            values={[0, 20, 40, 60, 80, 100]}
+                                        >
+                                            {percentage => (
+                                                <CircularProgressbar
+                                                    value={percentage}
+                                                    text={`${percentage}%`}
+                                                />
+                                            )}
+                                        </ChangingProgressProvider>
+                                    }
+                                    unloader={
+                                        <img
+                                            width="300"
+                                            src="http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png"
+                                        />
+                                    }
+                                />
+                            </div>
+                        </div>
+                    </div>
 
-                    <img
+                    {/* <Imgloader /> */}
+                    {/* <img
                         src={image}
                         width="200"
                         className="rounded-circle"
                         alt="Фото"
-                    />
+                    /> */}
 
                     <CropperModal getCroppedImage={this.getCroppedImage} />
 
