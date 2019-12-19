@@ -35,47 +35,16 @@ class FileuploadController extends Controller
      */
     public function store(Request $request)
     {
-       
-        
         if($request->get('file'))
         {
            $image = $request->get('file');
            $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
            \Image::make($request->get('file'))->save(public_path('images\\').$name);
          }
- 
- 
- 
          $fileupload = new Fileupload();
          $fileupload->filename=$name;
          $fileupload->save();
          return response()->json('Successfully added');
-
-
-
-    // $file = $request->file('image');
-    // $ext = $file->extension();
-    // $name = str_random(20).'.'.$ext ;
-    // list($width, $height) = getimagesize($file);
-    // $path = Storage::disk('public')->putFileAs(
-    //     'uploads', $file, $name
-    // );
-    // if($path){
-    //     $create = Auth::user()->photos()->create([
-    //         'uri' => $path,
-    //         'public' => false,
-    //         'height' => $height,
-    //         'width' => $width
-    //     ]);
- 
-    //     if($create){
-    //         return response()->json([
-    //             'uploaded' => true
-    //         ]);
-    //     }
-    // }
-
-
     }
 
     /**
@@ -122,4 +91,6 @@ class FileuploadController extends Controller
     {
         //
     }
+
+  
 }

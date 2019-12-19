@@ -6,10 +6,7 @@ import classnames from "classnames";
 import Captcha from "react-numeric-captcha";
 import axios from "axios";
 import "./captcha.css";
-import FileUploadComponent from "../../common/FileUploadComponent";
-
-import Cropper from "react-cropper";
-import "cropperjs/dist/cropper.css";
+import CropperModal from "../../common/cropper/CropperModal";
 
 export class RegisterPage extends Component {
     state = {
@@ -17,7 +14,8 @@ export class RegisterPage extends Component {
         password: "",
         passwordConfirm: "",
         dateOfBirth: new Date(),
-        image: "",
+        image:
+            "http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png",
         phone: "",
         focus: false,
         errors: {
@@ -30,6 +28,11 @@ export class RegisterPage extends Component {
         this.setState({ focus: true });
     };
 
+    getCroppedImage = img => {
+        //console.log('----img-----', img);
+
+        this.setState({ image: img });
+    };
     handleInputBlur = () => {
         console.log("qwe");
         this.setState({ focus: false });
@@ -134,25 +137,21 @@ export class RegisterPage extends Component {
         if (isValid) {
             console.log("Model is Valid");
             //ajax axios post
-            var bodyFormData = new FormData();
-            bodyFormData.set("name", email);
-            bodyFormData.set("email", email);
-            bodyFormData.set("password", password);
-            axios({
-                method: "post",
-                url: "/api/register",
-                data: bodyFormData,
-                headers: { "Content-Type": "multipart/form-data" }
-            })
-                .then(function(response) {
-                    //handle success
-                    console.log(response);
-                })
-                .catch(function(response) {
-                    //handle error
-
-                    console.log(response);
-                });
+            const model = {
+                email,
+                password,
+                dateOfBirth,
+                image,
+                phone
+            };
+            axios.post("/api/register", model).then(
+                resp => {
+                    console.log("----server responce----", resp);
+                },
+                error => {
+                    console.log("----server error----", error);
+                }
+            );
 
             this.fileUpload(image);
         } else {
@@ -174,6 +173,13 @@ export class RegisterPage extends Component {
         } = this.state;
         console.log("Regiter page state", this.state);
         console.log("focus", focus);
+
+        // let photo =
+        //     "https://topdogtours.com/wp-content/uploads/Top-Dog-Tours-Logo-no-Text-300x259.png";
+        // if (!!image) {
+        //     image = photo;
+        // }
+
         return (
             <>
                 <h1 className="d-flex justify-content-center">Реєстрація</h1>
@@ -220,15 +226,14 @@ export class RegisterPage extends Component {
                         />
                     ) : null}
 
-                    <FileUploadComponent
-                        field="Фото"
-                        label="Фото"
-                        error={errors.image}
-                        message={image}
-                        onChange={this.onChangeFile}
-                        type="file"
+                    <img
+                        src={image}
+                        width="200"
+                        className="rounded-circle"
+                        alt="Фото"
                     />
-                    <img id="prev" src={image} />
+
+                    <CropperModal getCroppedImage={this.getCroppedImage} />
 
                     <div className="form-group">
                         <label htmlFor="phone">Телефон</label>

@@ -15,7 +15,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password' ,'image','phone','dateOfBirth'
     ];
 
     /**
@@ -47,6 +47,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function Fileupload()
     {
-    	return $this->belongsTo(Fileupload::class);
+        return $this->hasOne('App\Fileupload');
+    	// return $this->belongsTo(Fileupload::class);
     }
  }
