@@ -99,7 +99,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
- // import Imgloader from "../../common/img-loader/imgloader";
 
 
 
@@ -130,30 +129,23 @@ function (_Component) {
       image: "",
       phone: "",
       focus: false,
-      errors: {//email: 'Invalid'
-      },
-      captchaSuccess: false,
-      percentage: 0
+      errors: {},
+      captchaSuccess: false
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleInputFocus", function () {
-      console.log("qwe");
-
       _this.setState({
         focus: true
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "getCroppedImage", function (img) {
-      //console.log('----img-----', img);
       _this.setState({
         image: img
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleInputBlur", function () {
-      console.log("qwe");
-
       _this.setState({
         focus: false
       });
@@ -222,16 +214,11 @@ function (_Component) {
       })["catch"](function (response) {
         //handle error
         console.log(response);
-      }); // const isValid = Object.keys(errors).length === 0;
-
-      console.log("errors after axios", errors);
+      });
 
       _this.setState({
         errors: errors
-      }); // setStateByErrors(email, email);
-
-
-      console.log("errors STATE", _this.state);
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "onChange", function (date) {
@@ -279,7 +266,7 @@ function (_Component) {
           console.log("----server responce----", resp);
         }, function (error) {
           console.log("----server error----", error);
-        });
+        }); //Uplaod Image
 
         _this.fileUpload(image);
       } else {
@@ -306,15 +293,9 @@ function (_Component) {
           phone = _this$state2.phone,
           errors = _this$state2.errors,
           focus = _this$state2.focus,
-          captchaSuccess = _this$state2.captchaSuccess,
-          percentage = _this$state2.percentage;
+          captchaSuccess = _this$state2.captchaSuccess;
       console.log("Regiter page state", this.state);
-      console.log("focus", focus); // let photo =
-      //     "https://topdogtours.com/wp-content/uploads/Top-Dog-Tours-Logo-no-Text-300x259.png";
-      // if (!!image) {
-      //     image = photo;
-      // }
-
+      console.log("focus", focus);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "d-flex justify-content-center"
       }, "\u0420\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -347,8 +328,7 @@ function (_Component) {
         value: dateOfBirth.toLocaleDateString(),
         error: errors.dateOfBirth,
         onChange: this.handleChange,
-        onFocus: this.handleInputFocus //  onBlur={this.handleInputBlur}
-
+        onFocus: this.handleInputFocus
       }), focus ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_calendar__WEBPACK_IMPORTED_MODULE_2___default.a, {
         onChange: this.onChange,
         value: dateOfBirth
@@ -359,9 +339,9 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "w-40"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_image__WEBPACK_IMPORTED_MODULE_9___default.a, {
+        className: "rounded-circle",
         width: "300",
-        src: image // loader={<Imgloader />}
-        ,
+        src: image,
         loader: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_img_loader_ChangingProgressProvider__WEBPACK_IMPORTED_MODULE_11__["default"], {
           values: [0, 20, 40, 60, 80, 100]
         }, function (percentage) {

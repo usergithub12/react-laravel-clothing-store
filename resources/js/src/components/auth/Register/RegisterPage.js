@@ -8,8 +8,6 @@ import axios from "axios";
 import "./captcha.css";
 import CropperModal from "../../common/cropper/CropperModal";
 import Img from "react-image";
-// import Imgloader from "../../common/img-loader/imgloader";
-
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import ChangingProgressProvider from "../../common/img-loader/ChangingProgressProvider";
 import "react-circular-progressbar/dist/styles.css";
@@ -23,24 +21,17 @@ export class RegisterPage extends Component {
         image: "",
         phone: "",
         focus: false,
-        errors: {
-            //email: 'Invalid'
-        },
-        captchaSuccess: false,
-        percentage: 0
+        errors: {},
+        captchaSuccess: false
     };
     handleInputFocus = () => {
-        console.log("qwe");
         this.setState({ focus: true });
     };
 
     getCroppedImage = img => {
-        //console.log('----img-----', img);
-
         this.setState({ image: img });
     };
     handleInputBlur = () => {
-        console.log("qwe");
         this.setState({ focus: false });
     };
 
@@ -94,21 +85,15 @@ export class RegisterPage extends Component {
         })
             .then(function(response) {
                 //handle success
-
                 errors.email = "Користувач з такою поштою вже зареєстрований!";
                 console.log("errors from check axios", errors);
                 console.log(response);
             })
             .catch(function(response) {
                 //handle error
-
                 console.log(response);
             });
-        // const isValid = Object.keys(errors).length === 0;
-        console.log("errors after axios", errors);
         this.setState({ errors });
-        // setStateByErrors(email, email);
-        console.log("errors STATE", this.state);
     };
 
     onChange = date => this.setState({ dateOfBirth: date, focus: false });
@@ -158,7 +143,7 @@ export class RegisterPage extends Component {
                     console.log("----server error----", error);
                 }
             );
-
+            //Uplaod Image
             this.fileUpload(image);
         } else {
             this.setState({ errors });
@@ -175,17 +160,10 @@ export class RegisterPage extends Component {
             phone,
             errors,
             focus,
-            captchaSuccess,
-            percentage
+            captchaSuccess
         } = this.state;
         console.log("Regiter page state", this.state);
         console.log("focus", focus);
-
-        // let photo =
-        //     "https://topdogtours.com/wp-content/uploads/Top-Dog-Tours-Logo-no-Text-300x259.png";
-        // if (!!image) {
-        //     image = photo;
-        // }
 
         return (
             <>
@@ -223,7 +201,6 @@ export class RegisterPage extends Component {
                         error={errors.dateOfBirth}
                         onChange={this.handleChange}
                         onFocus={this.handleInputFocus}
-                        //  onBlur={this.handleInputBlur}
                     />
 
                     {focus ? (
@@ -236,9 +213,9 @@ export class RegisterPage extends Component {
                         <div className="d-flex justify-content-center">
                             <div className="w-40">
                                 <Img
+                                    className="rounded-circle"
                                     width="300"
                                     src={image}
-                                    // loader={<Imgloader />}
                                     loader={
                                         <ChangingProgressProvider
                                             values={[0, 20, 40, 60, 80, 100]}
@@ -261,14 +238,6 @@ export class RegisterPage extends Component {
                             </div>
                         </div>
                     </div>
-
-                    {/* <Imgloader /> */}
-                    {/* <img
-                        src={image}
-                        width="200"
-                        className="rounded-circle"
-                        alt="Фото"
-                    /> */}
 
                     <CropperModal getCroppedImage={this.getCroppedImage} />
 
