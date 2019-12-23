@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 // import Header from './Header'
 
+import "./App.css";
 import NavHeader from "./components/Header";
 const HomePage = lazy(() => import("./components/Home"));
 const RegisterPage = lazy(() => import("./components/auth/Register"));
@@ -30,7 +31,12 @@ class App extends Component {
                         <img
                             className="d-flex justify-content-center"
                             style={loadstyle}
-                            src="https://i2.wp.com/media.boingboing.net/wp-content/uploads/2015/10/tumblr_nlohpxGdBi1tlivlxo1_12801.gif?zoom=2&w=970"
+                            // src="https://i2.wp.com/media.boingboing.net/wp-content/uploads/2015/10/tumblr_nlohpxGdBi1tlivlxo1_12801.gif?zoom=2&w=970"
+                            // src="https://i.gifer.com/XOsX.gif"
+                            //src="https://i.gifer.com/7VE.gif"
+                            //src="https://i.gifer.com/GXK5.gif"
+                            //src="https://media.giphy.com/media/dWT8DuGDdZeso9Qxz7/giphy.gif"
+                            src="https://media.giphy.com/media/fWgAX8RMBmKuuNK3a9/giphy.gif"
                         ></img>
                     }
                 >

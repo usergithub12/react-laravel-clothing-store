@@ -214,7 +214,7 @@ export class RegisterPage extends Component {
                             <div className="w-40">
                                 <Img
                                     className="rounded-circle"
-                                    width="300"
+                                    width="100"
                                     src={image}
                                     loader={
                                         <ChangingProgressProvider
@@ -230,8 +230,9 @@ export class RegisterPage extends Component {
                                     }
                                     unloader={
                                         <img
-                                            width="300"
-                                            src="http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png"
+                                            width="100"
+                                            // src="http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png"
+                                            src="https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/NO_IMG_600x600.png"
                                         />
                                     }
                                 />
@@ -260,15 +261,16 @@ export class RegisterPage extends Component {
                             </div>
                         )}
                     </div>
-
-                    <Captcha
-                        onChange={status =>
-                            this.setState({ captchaSuccess: status })
-                        }
-                    />
-                    <div className="form-group">
+                    <div className="form-group  d-flex justify-content-center">
+                        <Captcha
+                            onChange={status =>
+                                this.setState({ captchaSuccess: status })
+                            }
+                        />
+                    </div>
+                    <div className="form-group  d-flex justify-content-center">
                         <button
-                            className="btn btn-primary"
+                            className="btn btn-primary "
                             disabled={!captchaSuccess}
                         >
                             Зареєструватися

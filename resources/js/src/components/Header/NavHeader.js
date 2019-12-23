@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 export class NavHeader extends Component {
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark transparent">
                 <Link className="navbar-brand" to="/">
-                    Navbar
+                    Cloth Store
                 </Link>
                 <button
                     className="navbar-toggler"
@@ -19,7 +19,10 @@ export class NavHeader extends Component {
                 >
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
+                <div
+                    className="collapse navbar-collapse justify-content-end order-2"
+                    id="navbarNav"
+                >
                     <ul className="navbar-nav">
                         <li className="nav-item active">
                             <Link className="nav-link" to="/">

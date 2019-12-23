@@ -100,7 +100,7 @@ export class Login extends Component {
                 <Fragment>
                     <div className="container">
                         <div className="row justify-content-center">
-                            <div className="card  bg-light">
+                            <div className="card  bg-dark">
                                 <div className="card-header">
                                     <h3>Вхід</h3>
                                     <div className="d-flex justify-content-end social_icon">

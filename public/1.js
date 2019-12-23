@@ -340,7 +340,7 @@ function (_Component) {
         className: "w-40"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_image__WEBPACK_IMPORTED_MODULE_9___default.a, {
         className: "rounded-circle",
-        width: "300",
+        width: "100",
         src: image,
         loader: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_img_loader_ChangingProgressProvider__WEBPACK_IMPORTED_MODULE_11__["default"], {
           values: [0, 20, 40, 60, 80, 100]
@@ -351,8 +351,9 @@ function (_Component) {
           });
         }),
         unloader: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          width: "300",
-          src: "http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png"
+          width: "100" // src="http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png"
+          ,
+          src: "https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/NO_IMG_600x600.png"
         })
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_cropper_CropperModal__WEBPACK_IMPORTED_MODULE_8__["default"], {
         getCroppedImage: this.getCroppedImage
@@ -372,16 +373,18 @@ function (_Component) {
         })
       }), !!errors.phone && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "invalid-feedback"
-      }, errors.phone)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_numeric_captcha__WEBPACK_IMPORTED_MODULE_5___default.a, {
+      }, errors.phone)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group  d-flex justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_numeric_captcha__WEBPACK_IMPORTED_MODULE_5___default.a, {
         onChange: function onChange(status) {
           return _this2.setState({
             captchaSuccess: status
           });
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group  d-flex justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary",
+        className: "btn btn-primary ",
         disabled: !captchaSuccess
       }, "\u0417\u0430\u0440\u0435\u0454\u0441\u0442\u0440\u0443\u0432\u0430\u0442\u0438\u0441\u044F"))));
     }
