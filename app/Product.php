@@ -12,5 +12,8 @@ class Product extends Model
      'material','color','gender_id',
      'producer_id','type_id',
     ];
-    
+    public function product_data()
+    {
+      return $this->hasOne(ProductData::class);
+    }
 }

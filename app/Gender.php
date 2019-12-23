@@ -9,8 +9,8 @@ class Gender extends Model
 {
     //
     protected $fillable = ['name'];
-    public function products()
+    public function product_data()
     {
-      return $this->hasMany(Product::class);
+      return $this->belongsToMany(ProductData::class);
     }
 }

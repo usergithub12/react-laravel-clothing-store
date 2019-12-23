@@ -8,8 +8,8 @@ class Producer extends Model
 {
     //
     protected $fillable = ['name','country'];
-    public function products()
+    public function product_data()
     {
-      return $this->hasMany(Product::class);
+      return $this->belongsToMany(ProductData::class);
     }
 }

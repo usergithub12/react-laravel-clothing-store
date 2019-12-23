@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 // Route::post('login', 'LoginController')->name('login');
+
+Route::get('prod','ProductController@getProducts');
+
 Route::resource('fileupload', 'FileuploadController');
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
