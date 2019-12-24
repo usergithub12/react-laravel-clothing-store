@@ -56189,10 +56189,13 @@ var HomePage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
   return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/Home */ "./resources/js/src/components/Home/index.js"));
 });
 var RegisterPage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./components/auth/Register */ "./resources/js/src/components/auth/Register/index.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(5), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./components/auth/Register */ "./resources/js/src/components/auth/Register/index.js"));
 });
 var Login = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
   return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/auth/Login */ "./resources/js/src/components/auth/Login/index.js"));
+});
+var UserProfile = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./components/UserProfile/UserProfile */ "./resources/js/src/components/UserProfile/UserProfile.js"));
 }); // import RegisterPage from "./components/auth/Register";
 // import Login from "./components/auth/Login";
 // import HomePage from "./components/Home";
@@ -56240,7 +56243,10 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(RegisterPage, null)), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
         exact: true,
         path: "/login"
-      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Login, null)))));
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Login, null)), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+        exact: true,
+        path: "/userprofile"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(UserProfile, null)))));
     }
   }]);
 
@@ -56342,7 +56348,12 @@ function (_Component) {
         to: "/register",
         tabIndex: "-1",
         "aria-disabled": "true"
-      }, "Disabled")))));
+      }, "Disabled")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "nav-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "nav-link",
+        to: "/userprofile"
+      }, "\u041F\u0440\u043E\u0444\u0456\u043B\u044C")))));
     }
   }]);
 
@@ -56385,8 +56396,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\react-laravel-auth\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\react-laravel-auth\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\react-laravel-clothing-store\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\react-laravel-clothing-store\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
