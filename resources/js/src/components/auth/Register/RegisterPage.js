@@ -137,6 +137,7 @@ export class RegisterPage extends Component {
             };
             axios.post("/api/register", model).then(
                 resp => {
+                    this.fileUpload(image);
                     console.log("----server responce----", resp);
                 },
                 error => {
@@ -144,7 +145,6 @@ export class RegisterPage extends Component {
                 }
             );
             //Uplaod Image
-            this.fileUpload(image);
         } else {
             this.setState({ errors });
         }

@@ -19,9 +19,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_input_mask__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_input_mask__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../common/cropper/CropperModal'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _common_cropper_CropperModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/cropper/CropperModal */ "./resources/js/src/components/common/cropper/CropperModal.js");
 /* harmony import */ var react_circular_progressbar_dist_styles_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-circular-progressbar/dist/styles.css */ "./node_modules/react-circular-progressbar/dist/styles.css");
 /* harmony import */ var react_circular_progressbar_dist_styles_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_circular_progressbar_dist_styles_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -49,6 +51,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+var token = localStorage.token;
 var UserProfile =
 /*#__PURE__*/
 function (_Component) {
@@ -68,78 +72,89 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(UserProfile)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      email: "",
-      password: "",
-      passwordConfirm: "",
-      dateOfBirth: new Date(),
-      image: "",
-      phone: "",
-      focus: false,
-      errors: {},
-      captchaSuccess: false
+      userInfo: {},
+      errors: {}
     });
 
     return _this;
   }
 
   _createClass(UserProfile, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      console.log("token from profile", token);
+      axios__WEBPACK_IMPORTED_MODULE_7___default.a.get("/api/user", // { Authorization: "Bearer " + token },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token //the token is a variable which holds the token
+
+        }
+      }).then(function (response) {
+        //handle success
+        _this2.setState({
+          userInfo: response.data
+        });
+
+        console.log("auth user form request", response);
+      })["catch"](function (response) {
+        //handle error
+        console.log(response);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      console.log("userInfo", this.state.userInfo);
       var _this$state = this.state,
-          email = _this$state.email,
-          password = _this$state.password,
-          dateOfBirth = _this$state.dateOfBirth,
-          passwordConfirm = _this$state.passwordConfirm,
-          image = _this$state.image,
-          phone = _this$state.phone,
-          errors = _this$state.errors,
-          focus = _this$state.focus,
-          captchaSuccess = _this$state.captchaSuccess;
+          userInfo = _this$state.userInfo,
+          errors = _this$state.errors;
+      var imgPath = "/images/".concat(userInfo.image);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "d-flex justify-content-center"
-      }, "\u0420\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        name: "form",
-        onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        field: "email",
-        label: "\u0415\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430 \u043F\u043E\u0448\u0442\u0430",
-        value: email,
-        error: errors.email,
-        onChange: this.handleChange,
-        onBlur: this.checkUserExists
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        field: "password",
-        label: "\u041F\u0430\u0440\u043E\u043B\u044C",
-        value: password,
-        error: errors.password,
-        onChange: this.handleChange,
-        type: "password"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        field: "passwordConfirm",
-        label: "\u041F\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0436\u0435\u043D\u043D\u044F \u043F\u0430\u0440\u043E\u043B\u044E",
-        value: passwordConfirm,
-        error: errors.passwordConfirm,
-        onChange: this.handleChange,
-        type: "password"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        field: "dateOfBirth",
-        label: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F",
-        value: dateOfBirth.toLocaleDateString(),
-        error: errors.dateOfBirth,
-        onChange: this.handleChange,
-        onFocus: this.handleInputFocus
-      }), focus ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_calendar__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        onChange: this.onChange,
-        value: dateOfBirth
-      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Profile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-flex justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "w-40"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/NO_IMG_600x600.png"
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module '../../common/cropper/CropperModal'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+        className: "rounded-circle",
+        width: "200",
+        src: imgPath
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        name: "form",
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        field: "email",
+        label: "\u0415\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430 \u043F\u043E\u0448\u0442\u0430",
+        value: userInfo.email,
+        error: errors.email,
+        onChange: this.handleChange // onBlur={this.checkUserExists}
+
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        field: "password",
+        label: "\u041F\u0430\u0440\u043E\u043B\u044C",
+        value: userInfo.password,
+        error: errors.password,
+        onChange: this.handleChange,
+        type: "password"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        field: "dateOfBirth",
+        label: "\u0414\u0430\u0442\u0430 \u043D\u0430\u0440\u043E\u0434\u0436\u0435\u043D\u043D\u044F",
+        value: userInfo.dateOfBirth,
+        error: errors.dateOfBirth,
+        onChange: this.handleChange,
+        onFocus: this.handleInputFocus
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_cropper_CropperModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
         getCroppedImage: this.getCroppedImage
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -148,7 +163,7 @@ function (_Component) {
       }, "\u0422\u0435\u043B\u0435\u0444\u043E\u043D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_input_mask__WEBPACK_IMPORTED_MODULE_3___default.a, {
         id: "phone",
         name: "phone",
-        value: phone,
+        value: userInfo.phone,
         onChange: this.handleChange,
         mask: "+38 (099) 999-99-99",
         maskChar: " ",
@@ -160,82 +175,15 @@ function (_Component) {
       }, errors.phone)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group  d-flex justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary ",
-        disabled: !captchaSuccess
-      }, "\u0417\u0430\u0440\u0435\u0454\u0441\u0442\u0440\u0443\u0432\u0430\u0442\u0438\u0441\u044F"))));
+        className: "btn btn-primary " // disabled={!captchaSuccess}
+
+      }, "\u0417\u0431\u0435\u0440\u0435\u0433\u0442\u0438")))))));
     }
   }]);
 
   return UserProfile;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 /* harmony default export */ __webpack_exports__["default"] = (UserProfile);
-
-/***/ }),
-
-/***/ "./resources/js/src/components/common/TextFieldGroup.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/src/components/common/TextFieldGroup.js ***!
-  \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-
-var TextFieldGroup = function TextFieldGroup(_ref) {
-  var field = _ref.field,
-      value = _ref.value,
-      label = _ref.label,
-      error = _ref.error,
-      type = _ref.type,
-      onChange = _ref.onChange,
-      onFocus = _ref.onFocus,
-      onBlur = _ref.onBlur,
-      checkUserExists = _ref.checkUserExists;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "form-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    htmlFor: field
-  }, label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    onChange: onChange,
-    onBlur: onBlur,
-    onFocus: onFocus,
-    value: value,
-    type: type,
-    id: field,
-    name: field,
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("form-control", {
-      "is-invalid": !!error
-    })
-  }), !!error && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "invalid-feedback"
-  }, error));
-};
-
-TextFieldGroup.propTypes = {
-  field: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  value: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  label: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  error: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
-  type: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  onChange: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
-  checkUserExists: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
-  onBlur: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
-  onFocus: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
-};
-TextFieldGroup.defaultProps = {
-  type: "text"
-};
-/* harmony default export */ __webpack_exports__["default"] = (TextFieldGroup);
 
 /***/ })
 

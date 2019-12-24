@@ -13,7 +13,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-      $image = Fileupload::find(1)->filename;
+      $image = Fileupload::latest('id')->first()->filename;
       $user = User::create([
         'email' => $request->email,
         'password' => bcrypt($request->password),

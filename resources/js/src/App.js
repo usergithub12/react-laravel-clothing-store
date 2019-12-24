@@ -5,9 +5,6 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 // import Header from './Header'
 
-
-
-
 import "./App.css";
 import NavHeader from "./components/Header";
 const HomePage = lazy(() => import("./components/Home"));

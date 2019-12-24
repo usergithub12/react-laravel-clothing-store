@@ -56189,13 +56189,13 @@ var HomePage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
   return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/Home */ "./resources/js/src/components/Home/index.js"));
 });
 var RegisterPage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(5), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./components/auth/Register */ "./resources/js/src/components/auth/Register/index.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./components/auth/Register */ "./resources/js/src/components/auth/Register/index.js"));
 });
 var Login = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
   return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/auth/Login */ "./resources/js/src/components/auth/Login/index.js"));
 });
 var UserProfile = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./components/UserProfile/UserProfile */ "./resources/js/src/components/UserProfile/UserProfile.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./components/UserProfile/UserProfile */ "./resources/js/src/components/UserProfile/UserProfile.js"));
 }); // import RegisterPage from "./components/auth/Register";
 // import Login from "./components/auth/Login";
 // import HomePage from "./components/Home";
@@ -56270,6 +56270,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _utils_setAuthorizationToken__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/setAuthorizationToken */ "./resources/js/src/utils/setAuthorizationToken.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -56280,13 +56281,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -56296,14 +56300,41 @@ function (_Component) {
   _inherits(NavHeader, _Component);
 
   function NavHeader() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, NavHeader);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(NavHeader).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(NavHeader)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "logout", function () {
+      console.log("logout");
+      localStorage.removeItem("token");
+      Object(_utils_setAuthorizationToken__WEBPACK_IMPORTED_MODULE_2__["default"])(false);
+
+      _this.setState({
+        isSignedUp: true
+      }); // return <Redirect to={{ pathname: "/login" }} />;
+
+    });
+
+    return _this;
   }
 
   _createClass(NavHeader, [{
     key: "render",
     value: function render() {
+      // const { isSignedUp } = this.state;
+      // console.log(this.state);
+      // if (isSignedUp) {
+      //     // redirect to home if signed up
+      //     return <Redirect to={{ pathname: "/login" }} />;
+      // }
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
         className: "navbar navbar-expand-lg navbar-dark transparent"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -56344,11 +56375,10 @@ function (_Component) {
       }, "\u0412\u0445\u0456\u0434")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "nav-link disabled",
-        to: "/register",
-        tabIndex: "-1",
-        "aria-disabled": "true"
-      }, "Disabled")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        to: "/login",
+        className: "nav-link",
+        onClick: this.logout
+      }, "\u0412\u0438\u0445\u0456\u0434")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "nav-link",
@@ -56378,6 +56408,29 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/src/utils/setAuthorizationToken.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/src/utils/setAuthorizationToken.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return setAuthorizationToken; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+function setAuthorizationToken(token) {
+  if (token) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer ".concat(token);
+  } else {
+    delete axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"];
+  }
+}
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -56396,8 +56449,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\react-laravel-clothing-store\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\react-laravel-clothing-store\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\react-laravel-auth\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\react-laravel-auth\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
