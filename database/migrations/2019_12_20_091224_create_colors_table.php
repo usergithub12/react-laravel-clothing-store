@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFileuploadsTable extends Migration
+class CreateColorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateFileuploadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fileuploads', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('filename');
-            $table->timestamps();
+        Schema::create('colors', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
         });
     }
 
@@ -27,6 +26,6 @@ class CreateFileuploadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fileuploads');
+        Schema::dropIfExists('colors');
     }
 }
