@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import TextFieldGroup from "../../common/TextFieldGroup";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
+import setAuthorizationToken from "../../../utils/setAuthorizationToken";
 
 export class Login extends Component {
     constructor(props) {
@@ -77,7 +78,15 @@ export class Login extends Component {
                     // history.push("/");
                     this.setState({ isSignedUp: true });
                     console.log(response);
+                    localStorage.setItem("token", response.data.access_token);
+                    var token = response.data;
+                    //console.log("data login", token);
+                    // var user = jwt.decode(token);
+                    //console.log('-----user login------', user);
+                    // localStorage.setItem("jwtToken", token);
+                    setAuthorizationToken(token);
                 })
+
                 .catch(response => {
                     //handle error
 
@@ -93,7 +102,7 @@ export class Login extends Component {
         const { email, password, errors, isSignedUp } = this.state;
         if (isSignedUp) {
             // redirect to home if signed up
-            return <Redirect to={{ pathname: "/" }} />;
+            return <Redirect to={{ pathname: "/userprofile" }} />;
         }
         return (
             <div>

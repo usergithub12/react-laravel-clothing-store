@@ -10,6 +10,7 @@ import NavHeader from "./components/Header";
 const HomePage = lazy(() => import("./components/Home"));
 const RegisterPage = lazy(() => import("./components/auth/Register"));
 const Login = lazy(() => import("./components/auth/Login"));
+const UserProfile = lazy(() => import("./components/UserProfile/UserProfile"));
 // import RegisterPage from "./components/auth/Register";
 // import Login from "./components/auth/Login";
 // import HomePage from "./components/Home";
@@ -50,6 +51,9 @@ class App extends Component {
                         </Route>
                         <Route exact path="/login">
                             <Login />
+                        </Route>
+                        <Route exact path="/userprofile">
+                            <UserProfile />
                         </Route>
                     </div>
                 </Suspense>
