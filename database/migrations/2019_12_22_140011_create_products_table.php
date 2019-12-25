@@ -19,14 +19,11 @@ class CreateProductsTable extends Migration
             $table->string('price');
             $table->string('size');
             $table->string('rating');
-            $table->bigInteger('product_data_id');
-            // $table->string('material');
-            // $table->string('color');
-            // $table->unsignedInteger('gender_id');
-            // $table->unsignedInteger('producer_id');
-            // $table->unsignedInteger('type_id');
-  
+            $table->string('main_image');
+            $table->string('images');
+            $table->bigInteger('product_data_id')->unsigned();
             $table->timestamps();
+            $table->foreign('product_data_id')->references('id')->on('product_data');
         });
     }
 
