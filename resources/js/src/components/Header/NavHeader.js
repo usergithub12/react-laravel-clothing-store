@@ -42,12 +42,10 @@ export class NavHeader extends Component {
                         </li>
                         <li className="nav-item">
                             <Link
-                                className="nav-link disabled"
-                                to="/register"
-                                tabIndex="-1"
-                                aria-disabled="true"
+                                className="nav-link"
+                                to="/Shop"
                             >
-                                Disabled
+                                Products
                             </Link>
                         </li>
                     </ul>
