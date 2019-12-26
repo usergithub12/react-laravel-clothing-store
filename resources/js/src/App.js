@@ -16,7 +16,10 @@ const UserProfile = lazy(() => import("./components/UserProfile/UserProfile"));
 // import RegisterPage from "./components/auth/Register";
 // import Login from "./components/auth/Login";
 // import HomePage from "./components/Home";
-import Footer from "./components/footer/footer"
+import Footer from "./components/footer/footer";
+const Admin = lazy(() => import("./components/auth/Admin"));
+const Table = lazy(() => import("./components/auth/Table"));
+
 
 class App extends Component {
     render() {
@@ -65,6 +68,12 @@ class App extends Component {
                         </Route>
                         <Route exact path="/userprofile">
                             <UserProfile />
+                        </Route>
+                        <Route exact path="/admin">
+                        <Admin />
+                        </Route>
+                        <Route exact path="/dashboard">
+                        <Table />
                         </Route>
                     </div>
                 </Suspense>
