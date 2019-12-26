@@ -10,11 +10,10 @@ import NavHeader from "./components/Header";
 const HomePage = lazy(() => import("./components/Home"));
 const RegisterPage = lazy(() => import("./components/auth/Register"));
 const Login = lazy(() => import("./components/auth/Login"));
-<<<<<<< HEAD
-=======
+
 const ShopList = lazy(()=> import("./components/shopList"));
 const SingleItem = lazy(()=> import("./components/shopList/SingleItem"));
-const BasketPage = lazy(()=> ("./components/basket/BasketPage"));
+const BasketPage = lazy(()=> import("./components/basket/BasketPage"));
 const UserProfile = lazy(() => import("./components/UserProfile/UserProfile"));
 // import RegisterPage from "./components/auth/Register";
 // import Login from "./components/auth/Login";
