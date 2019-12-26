@@ -15,6 +15,7 @@ class AuthController extends Controller
     {
       $image = Fileupload::latest('id')->first()->filename;
       $user = User::create([
+        'full_name'=>$request->fullname,
         'email' => $request->email,
         'password' => bcrypt($request->password),
         'dateOfBirth' => $request->dateOfBirth,
@@ -53,6 +54,27 @@ class AuthController extends Controller
         'token_type' => 'bearer',
         'expires_in' => auth()->factory()->getTTL() * 60
       ]);
+    }
+
+    public function update(User $user)
+    { 
+      $image = Fileupload::latest('id')->first()->filename;
+        // $this->validate(request(), [
+        //     'email' => 'required|email|unique:users',
+        //     'password' => 'required|min:6'
+        // ]);
+
+        $user->full_name = request('fullname');
+        $user->email = request('email');
+        $user->password = bcrypt(request('password'));
+        $user->phone = request('phone');
+        $user->image = $image;
+        $user->dateOfBirth = request('dateOfBirth');
+     
+
+        $user->save();
+
+        return back();
     }
 
 }

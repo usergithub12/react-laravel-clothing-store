@@ -18,6 +18,7 @@ Route::get('prod','ProductController@getProducts');
 
 Route::resource('fileupload', 'FileuploadController');
 Route::post('register', 'AuthController@register');
+Route::post('update', 'AuthController@update');
 Route::post('login', 'AuthController@login');
 Route::get('logout', 'AuthController@logout');
 Route::get('user', 'AuthController@getAuthUser');
