@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import ReactDOM from 'react-dom';
-import 'react-laravel-clothing-store/resources/js/src/components/basket/basket.css';
+import './basket.css';
 
 class BasketPage extends Component {
 

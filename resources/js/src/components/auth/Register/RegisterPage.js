@@ -14,6 +14,7 @@ import "react-circular-progressbar/dist/styles.css";
 
 export class RegisterPage extends Component {
     state = {
+        fullname: "",
         email: "",
         password: "",
         passwordConfirm: "",
@@ -106,6 +107,7 @@ export class RegisterPage extends Component {
         e.preventDefault();
         console.log("--register submit--");
         const {
+            fullname,
             email,
             password,
             dateOfBirth,
@@ -114,7 +116,7 @@ export class RegisterPage extends Component {
             phone
         } = this.state;
         let errors = {};
-
+        if (fullname === "") errors.email = "Поле не може бути пустим!";
         if (email === "") errors.email = "Поле не може бути пустим!";
         if (password === "") errors.password = "Поле не може бути пустим!";
         if (passwordConfirm === "")
@@ -129,6 +131,7 @@ export class RegisterPage extends Component {
             console.log("Model is Valid");
             //ajax axios post
             const model = {
+                fullname,
                 email,
                 password,
                 dateOfBirth,
@@ -137,6 +140,7 @@ export class RegisterPage extends Component {
             };
             axios.post("/api/register", model).then(
                 resp => {
+                    this.fileUpload(image);
                     console.log("----server responce----", resp);
                 },
                 error => {
@@ -144,7 +148,6 @@ export class RegisterPage extends Component {
                 }
             );
             //Uplaod Image
-            this.fileUpload(image);
         } else {
             this.setState({ errors });
         }
@@ -152,6 +155,7 @@ export class RegisterPage extends Component {
 
     render() {
         const {
+            fullname,
             email,
             password,
             dateOfBirth,
@@ -169,6 +173,14 @@ export class RegisterPage extends Component {
             <>
                 <h1 className="d-flex justify-content-center">Реєстрація</h1>
                 <form name="form" onSubmit={this.handleSubmit}>
+                    <TextFieldGroup
+                        field="fullname"
+                        label="Прізвище та ім'я"
+                        value={fullname}
+                        error={errors.fullname}
+                        onChange={this.handleChange}
+                        onBlur={this.checkUserExists}
+                    />
                     <TextFieldGroup
                         field="email"
                         label="Електронна пошта"
