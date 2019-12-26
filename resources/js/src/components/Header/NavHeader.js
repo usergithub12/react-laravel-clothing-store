@@ -69,6 +69,11 @@ export class NavHeader extends Component {
                                 Products
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/userprofile">
+                                Профіль
+                            </Link>
+                        </li>
                        
                     </ul>
                 </div>
