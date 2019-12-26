@@ -7,29 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 class ProductData extends Model
 {
     //
-    public function product_data()
+    public function products()
     {
-      return $this->hasOne(Product::class);
+      return $this->hasMany(Product::class);
     }
-     public function colors()
+     public function color()
      {
-       return $this->belongsToMany(Color::class);
+       return $this->belongsTo(Color::class);
      }
-     public function materials()
+     public function material()
      {
-       return $this->belongsToMany(Material::class);
+       return $this->belongsTo(Material::class);
      }
-     public function producers()
+     public function producer()
      {
-       return $this->belongsToMany(Producer::class);
+       return $this->belongsTo(Producer::class);
      }
-     public function types()
+     public function type()
      {
-       return $this->belongsToMany(Type::class);
+       return $this->belongsTo(Type::class);
      }
-     public function genders()
+     public function gender()
      {
-       return $this->belongsToMany(Gender::class);
+       return $this->belongsTo(Gender::class);
      }
 
 

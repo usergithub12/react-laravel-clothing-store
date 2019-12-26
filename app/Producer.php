@@ -12,4 +12,9 @@ class Producer extends Model
     {
       return $this->belongsToMany(ProductData::class);
     }
+    public function country()
+    {
+      return $this->belongsTo(Country::class);
+    }
 }
+

@@ -10,12 +10,7 @@ class ProductController extends Controller
     //
     public function getProducts()
     {
-        $product = Product::first();
-        $colors = $product->product_data()->colors();
-        foreach($colors as $color)
-        {
-            dd(c);
-        }
-        dd($product->toArray());
+        $products = Product::with('product_data.color','product_data.material','product_data.type','product_data.gender','product_data.producer.country')->get();
+        return   $products->toJson();
     }
 }
