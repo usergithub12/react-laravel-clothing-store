@@ -12,6 +12,7 @@ const RegisterPage = lazy(() => import("./components/auth/Register"));
 const Login = lazy(() => import("./components/auth/Login"));
 const ShopList = lazy(()=> import("./components/shopList"));
 const SingleItem = lazy(()=> import("./components/shopList/SingleItem"));
+const UserProfile = lazy(() => import("./components/UserProfile/UserProfile"));
 // import RegisterPage from "./components/auth/Register";
 // import Login from "./components/auth/Login";
 // import HomePage from "./components/Home";
@@ -61,6 +62,9 @@ class App extends Component {
                         <Route exact path="/Item">
                             <SingleItem />
                             <Footer/>
+                        </Route>
+                        <Route exact path="/userprofile">
+                            <UserProfile />
                         </Route>
                     </div>
                 </Suspense>

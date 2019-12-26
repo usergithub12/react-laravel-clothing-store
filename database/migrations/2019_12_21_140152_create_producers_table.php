@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFileuploadsTable extends Migration
+class CreateProducersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateFileuploadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fileuploads', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('filename');
-            $table->timestamps();
+        Schema::create('producers', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->bigInteger('country_id')->unsigned();
+            $table->foreign('country_id')->references('id')->on('countries');
+
         });
     }
 
@@ -27,6 +29,6 @@ class CreateFileuploadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fileuploads');
+        Schema::dropIfExists('producers');
     }
 }
