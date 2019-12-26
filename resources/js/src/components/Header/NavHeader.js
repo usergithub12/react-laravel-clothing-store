@@ -60,27 +60,16 @@ export class NavHeader extends Component {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            {/* <Link
-                                className="nav-link disabled"
-                                to="/register"
-                                tabIndex="-1"
-                                aria-disabled="true"
-                            >
-                                Disabled
-                            </Link> */}
-                            <Link
-                                to="/login"
-                                className="nav-link"
-                                onClick={this.logout}
-                            >
+                            <Link to="/login" className="nav-link" onClick={this.logout}>
                                 Вихід
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/userprofile">
-                                Профіль
+                            <Link className="nav-link" to="/Shop">
+                                Products
                             </Link>
                         </li>
+                       
                     </ul>
                 </div>
             </nav>
