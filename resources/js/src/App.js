@@ -38,7 +38,7 @@ class App extends Component {
                             //src="https://i.gifer.com/GXK5.gif"
                             //src="https://media.giphy.com/media/dWT8DuGDdZeso9Qxz7/giphy.gif"
                             src="https://media.giphy.com/media/fWgAX8RMBmKuuNK3a9/giphy.gif"
-                        ></img>
+                            />
                     }
                 >
                     <div className="container">
