@@ -10,13 +10,18 @@ import NavHeader from "./components/Header";
 const HomePage = lazy(() => import("./components/Home"));
 const RegisterPage = lazy(() => import("./components/auth/Register"));
 const Login = lazy(() => import("./components/auth/Login"));
-const ShopList = lazy(() => import("./components/shopList"));
-const SingleItem = lazy(() => import("./components/shopList/SingleItem"));
+
+const ShopList = lazy(()=> import("./components/shopList"));
+const SingleItem = lazy(()=> import("./components/shopList/SingleItem"));
+const BasketPage = lazy(()=> import("./components/basket/BasketPage"));
 const UserProfile = lazy(() => import("./components/UserProfile/UserProfile"));
 // import RegisterPage from "./components/auth/Register";
 // import Login from "./components/auth/Login";
 // import HomePage from "./components/Home";
 import Footer from "./components/footer/footer";
+const Admin = lazy(() => import("./components/auth/Admin"));
+const Table = lazy(() => import("./components/auth/Table"));
+
 
 class App extends Component {
     render() {
@@ -41,7 +46,7 @@ class App extends Component {
                             //src="https://i.gifer.com/GXK5.gif"
                             //src="https://media.giphy.com/media/dWT8DuGDdZeso9Qxz7/giphy.gif"
                             src="https://media.giphy.com/media/fWgAX8RMBmKuuNK3a9/giphy.gif"
-                        ></img>
+                            />
                     }
                 >
                     <div className="container">
@@ -55,6 +60,11 @@ class App extends Component {
                         <Route exact path="/login">
                             <Login />
                         </Route>
+
+                        <Route exact path="/userprofile">
+                            <UserProfile />
+                        </Route>
+
                         <Route exact path="/Shop">
                             <ShopList />
                             {/* <Footer/> */}
@@ -66,7 +76,15 @@ class App extends Component {
                         <Route exact path="/userprofile">
                             <UserProfile />
                         </Route>
-                        <Route path="/Shop/:id" component={SingleItem} />
+                        <Route exact path="/admin">
+                        <Admin />
+                        </Route>
+                        <Route exact path="/dashboard">
+                        <Table />
+                        </Route>
+                        <Route exact path="/basket">
+                         <BasketPage />
+                        </Route>
                     </div>
                 </Suspense>
             </BrowserRouter>
