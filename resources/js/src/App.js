@@ -67,11 +67,11 @@ class App extends Component {
 
                         <Route exact path="/Shop">
                             <ShopList />
-                            <Footer/>
+                            {/* <Footer/> */}
                         </Route>
                         <Route exact path="/Item">
                             <SingleItem />
-                            <Footer/>
+                            {/* <Footer/> */}
                         </Route>
                         <Route exact path="/userprofile">
                             <UserProfile />

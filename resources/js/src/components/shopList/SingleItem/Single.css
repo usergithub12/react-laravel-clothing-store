@@ -1,8 +1,7 @@
-.ImaGe{
-    height: 20rem;
+.carousel-indicators .active {
+    background-color: #f00;
 }
-
-.des{
-    width: 90%;
-    padding-left: 2%;
+img {
+    width: 500px;
+    height: 500px;
 }

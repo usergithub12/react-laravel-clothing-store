@@ -1,28 +1,38 @@
-import React, { Component  } from 'react'
-import {Link} from 'react-router-dom'
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 //import { Button } from 'semantic-ui-react'
-import "./ShopItem.css"
+import "./ShopItem.css";
 
+import ProductModal from "../SingleItem/ProductModal";
+import "../SingleItem/Modal.css";
 
 export class ShopItem extends Component {
     render() {
+        const { id, name, price, size, rating, main_image, type } = this.props;
+        let imgPath = `/images/${main_image}`;
         return (
-            
-                <Link to="/Item">
-                    <div className="card col text-white bg-dark mb-3" >
-                        
-                        <img className="card-img-top" src="https://rukminim1.flixcart.com/image/880/1056/k3yrte80/shoe/h/8/p/sd0323g-10-sparx-white-black-original-imafmz8fpbn55gjz.jpeg?q=50" alt="Card image cap"/>
-                        
-                        <div className="card-body">
-                            <h5 className="card-title">Name</h5>
-                            <p className="">5$</p>                    
-                        </div> 
-                    </div>
-                </Link>
-            
+            <>
+                <div className="card col text-dark bg-light ">
+                    <img className="img-fluid w-100" src={imgPath} alt={name} />
 
-        )
+                    <div className="card-body">
+                        <h5 className="card-title">
+                            {type} {name}
+                        </h5>
+                        <p>
+                            <span className="text-danger">{price}$</span>{" "}
+                            <s>{price}$ </s>
+                        </p>
+                        {/* <p>Size: {size}</p>
+                        <p>Rating: {rating}</p> */}
+                        <Link to={`/Shop/${id}`} className="btn btn-primary">
+                            View Details
+                        </Link>
+                    </div>
+                </div>
+            </>
+        );
     }
 }
 
-export default ShopItem
+export default ShopItem;
