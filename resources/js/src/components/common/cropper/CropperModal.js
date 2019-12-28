@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import classnames from "classnames";
 import "cropperjs/dist/cropper.css";
 import "./Modal.scss";
 import Cropper from "react-cropper";
 import { Card, CardBody, CardFooter } from "reactstrap";
+import classnames from "classnames";
 import PropTypes from "prop-types";
 import FileFieldGroup from "../FileFieldGroup";
 

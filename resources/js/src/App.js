@@ -10,13 +10,13 @@ import NavHeader from "./components/Header";
 const HomePage = lazy(() => import("./components/Home"));
 const RegisterPage = lazy(() => import("./components/auth/Register"));
 const Login = lazy(() => import("./components/auth/Login"));
-const ShopList = lazy(()=> import("./components/shopList"));
-const SingleItem = lazy(()=> import("./components/shopList/SingleItem"));
+const ShopList = lazy(() => import("./components/shopList"));
+const SingleItem = lazy(() => import("./components/shopList/SingleItem"));
 const UserProfile = lazy(() => import("./components/UserProfile/UserProfile"));
 // import RegisterPage from "./components/auth/Register";
 // import Login from "./components/auth/Login";
 // import HomePage from "./components/Home";
-import Footer from "./components/footer/footer"
+import Footer from "./components/footer/footer";
 
 class App extends Component {
     render() {
@@ -57,15 +57,16 @@ class App extends Component {
                         </Route>
                         <Route exact path="/Shop">
                             <ShopList />
-                            <Footer/>
+                            {/* <Footer/> */}
                         </Route>
                         <Route exact path="/Item">
                             <SingleItem />
-                            <Footer/>
+                            {/* <Footer/> */}
                         </Route>
                         <Route exact path="/userprofile">
                             <UserProfile />
                         </Route>
+                        <Route path="/Shop/:id" component={SingleItem} />
                     </div>
                 </Suspense>
             </BrowserRouter>
