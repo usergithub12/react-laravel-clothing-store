@@ -103,6 +103,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(RegisterPage)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
+      fullname: "",
       email: "",
       password: "",
       passwordConfirm: "",
@@ -217,6 +218,7 @@ function (_Component) {
       e.preventDefault();
       console.log("--register submit--");
       var _this$state = _this.state,
+          fullname = _this$state.fullname,
           email = _this$state.email,
           password = _this$state.password,
           dateOfBirth = _this$state.dateOfBirth,
@@ -224,6 +226,7 @@ function (_Component) {
           image = _this$state.image,
           phone = _this$state.phone;
       var errors = {};
+      if (fullname === "") errors.email = "Поле не може бути пустим!";
       if (email === "") errors.email = "Поле не може бути пустим!";
       if (password === "") errors.password = "Поле не може бути пустим!";
       if (passwordConfirm === "") errors.passwordConfirm = "Поле не може бути пустим!";
@@ -237,6 +240,7 @@ function (_Component) {
         console.log("Model is Valid"); //ajax axios post
 
         var model = {
+          fullname: fullname,
           email: email,
           password: password,
           dateOfBirth: dateOfBirth,
@@ -266,6 +270,7 @@ function (_Component) {
       var _this2 = this;
 
       var _this$state2 = this.state,
+          fullname = _this$state2.fullname,
           email = _this$state2.email,
           password = _this$state2.password,
           dateOfBirth = _this$state2.dateOfBirth,
@@ -283,6 +288,13 @@ function (_Component) {
         name: "form",
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        field: "fullname",
+        label: "\u041F\u0440\u0456\u0437\u0432\u0438\u0449\u0435 \u0442\u0430 \u0456\u043C'\u044F",
+        value: fullname,
+        error: errors.fullname,
+        onChange: this.handleChange,
+        onBlur: this.checkUserExists
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
         field: "email",
         label: "\u0415\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430 \u043F\u043E\u0448\u0442\u0430",
         value: email,

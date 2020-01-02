@@ -183,12 +183,9 @@ export class SingleItem extends Component {
 
                             <div className="row">
                                 <div className="col">
-                                    <button
-                                        type="button"
-                                        className="btn btn-raised btn-primary btn-lg"
-                                    >
-                                        Додати в кошик
-                                    </button>
+                                <Link  className="btn btn-raised btn-primary btn-lg" to="/basket">
+                                Додати в кошик
+                            </Link>
                                 </div>
                                 <div className="col">
                                     <Link

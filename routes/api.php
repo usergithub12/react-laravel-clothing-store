@@ -16,6 +16,20 @@ use Illuminate\Http\Request;
 
 Route::get('prod','ProductController@getProducts');
 Route::get('product','ProductController@getProduct');
+//FILTERS
+Route::get('productbypricedesc','ProductController@getProductsbyPriceDesc');
+Route::get('productbypriceasc','ProductController@getProductsbyPriceAsc');
+//gender
+Route::get('productbymen','ProductController@getProductsforMens');
+Route::get('productbywomen','ProductController@getProductsforWomens');
+Route::get('productbykids','ProductController@getProductsforKids');
+//producers
+Route::get('producers','ProductController@getProducers');
+Route::get('productbyproducer','ProductController@getProductsbyProducer');
+///types
+Route::get('types','ProductController@getTypes');
+Route::get('productbytype','ProductController@getProductsbyType');
+////
 
 Route::resource('fileupload', 'FileuploadController');
 Route::post('register', 'AuthController@register');
