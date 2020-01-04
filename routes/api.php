@@ -29,8 +29,16 @@ Route::get('productbyproducer','ProductController@getProductsbyProducer');
 ///types
 Route::get('types','ProductController@getTypes');
 Route::get('productbytype','ProductController@getProductsbyType');
-////
+////materials
+Route::get('materials','ProductController@getMaterials');
+Route::get('productbymaterial','ProductController@getProductsbyMaterial');
+///sizes
+Route::get('productbysize','ProductController@getProductsbySize');
+//colors
+Route::get('colors','ProductController@getColors');
+Route::get('productbycolor','ProductController@getProductsbyColor');
 
+///
 Route::resource('fileupload', 'FileuploadController');
 Route::post('register', 'AuthController@register');
 Route::post('update', 'AuthController@update');

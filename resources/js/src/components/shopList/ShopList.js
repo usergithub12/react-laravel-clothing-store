@@ -2,13 +2,81 @@ import React, { Component } from "react";
 import ShopItem from "./shopItem/ShopItem";
 // import ProductModal from "./SingleItem/ProductModal";
 import FilterFieldGroup from "../common/FilterFieldGroup";
-
+import { Scrollbars } from "react-custom-scrollbars";
 import "./ShopList.css";
+import { withRouter } from "react-router-dom";
 export class ShopList extends Component {
     state = {
         list: [],
         producers: [],
-        types: []
+        types: [],
+        materials: [],
+        sizes: [
+            "34",
+            "35",
+            "35.5",
+            "36",
+            "36.5",
+            "37",
+            "37.5",
+            "38",
+            "38.5",
+            "39",
+            "40",
+            "40.5",
+            "41",
+            "41.5",
+            "42",
+            "42.5",
+            "43",
+            "43.5",
+            "44",
+            "44.5",
+            "45"
+        ],
+        colors: []
+    };
+
+    handleInputChangeColors = event => {
+        const { colors } = this.state;
+        const target = event.target;
+        const value =
+            target.type === "checkbox" ? target.checked : target.value;
+        const name = target.name;
+        console.log("hendleinput change name", event.target.name);
+        let id = 0;
+        colors.forEach(item => {
+            if (item.name == name) {
+                id = item.id;
+                console.log("id", id);
+            }
+        });
+        if (target.checked) {
+            axios
+                .get("/api/productbycolor", {
+                    params: {
+                        id: id
+                    }
+                })
+                .then(response => {
+                    //handle success
+                    this.setState({
+                        list: response.data
+                    });
+                    console.log("product from get request", response.data);
+                    console.log("target name", name);
+                })
+                .catch(response => {
+                    //handle error
+                    console.log(response);
+                });
+        } else {
+            this.getProducts();
+        }
+
+        this.setState({
+            [name]: value
+        });
     };
 
     handleInputChange = event => {
@@ -95,11 +163,127 @@ export class ShopList extends Component {
         });
     };
 
+    handleInputChangeMaterial = event => {
+        const { materials } = this.state;
+        const target = event.target;
+        const value =
+            target.type === "checkbox" ? target.checked : target.value;
+        const name = target.name;
+        console.log("hendleinput change name", event.target.name);
+        let id = 0;
+        materials.forEach(item => {
+            if (item.name == name) {
+                id = item.id;
+                console.log("id", id);
+            }
+        });
+        if (target.checked) {
+            axios
+                .get("/api/productbymaterial", {
+                    params: {
+                        id: id
+                    }
+                })
+                .then(response => {
+                    //handle success
+                    this.setState({
+                        list: response.data
+                    });
+                    console.log("product from get request", response.data);
+                    console.log("target name", name);
+                })
+                .catch(response => {
+                    //handle error
+                    console.log(response);
+                });
+        } else {
+            this.getProducts();
+        }
+
+        this.setState({
+            [name]: value
+        });
+    };
+
+    handleInputChangeSize = event => {
+        const { sizes } = this.state;
+        const target = event.target;
+        const value =
+            target.type === "checkbox" ? target.checked : target.value;
+        const name = target.name;
+        console.log("hendleinput change name", event.target.name);
+        // let id = 0;
+        // sizes.forEach(item => {
+        //     if (item.name == name) {
+        //         id = item.id;
+        //         console.log("id", id);
+        //     }
+        // });
+        if (target.checked) {
+            axios
+                .get("/api/productbysize", {
+                    params: {
+                        size: event.target.name
+                    }
+                })
+                .then(response => {
+                    //handle success
+                    this.setState({
+                        list: response.data
+                    });
+                    console.log("product from get request", response.data);
+                    console.log("target name", name);
+                })
+                .catch(response => {
+                    //handle error
+                    console.log(response);
+                });
+        } else {
+            this.getProducts();
+        }
+
+        this.setState({
+            [name]: value
+        });
+    };
+
     componentDidMount() {
         this.getProducts();
         this.getProducers();
         this.getTypes();
+        this.getMaterials();
+        this.getColors();
     }
+    getColors = () => {
+        axios
+            .get("/api/colors")
+            .then(response => {
+                //handle success
+                this.setState({
+                    colors: response.data
+                });
+                console.log("product from get request", response.data);
+            })
+            .catch(response => {
+                //handle error
+                console.log(response);
+            });
+    };
+    getMaterials = () => {
+        axios
+            .get("/api/materials")
+            .then(response => {
+                //handle success
+                this.setState({
+                    materials: response.data
+                });
+                console.log("product from get request", response.data);
+            })
+            .catch(response => {
+                //handle error
+                console.log(response);
+            });
+    };
     getTypes = () => {
         axios
             .get("/api/types")
@@ -116,34 +300,23 @@ export class ShopList extends Component {
             });
     };
     getProductsByDesc = () => {
-        axios
-            .get("/api/productbypricedesc")
-            .then(response => {
-                //handle success
-                this.setState({
-                    list: response.data
-                });
-                console.log("product from get request", response.data);
-            })
-            .catch(response => {
-                //handle error
-                console.log(response);
-            });
+        // axios
+        //     .get("/api/productbypricedesc")
+        //     .then(response => {
+        //         //handle success
+        //         this.setState({
+        //             list: response.data
+        //         });
+        //         console.log("product from get request", response.data);
+        //     })
+        //     .catch(response => {
+        //         //handle error
+        //         console.log(response);
+        //     });
+        this.getData("productbypricedesc");
     };
     getProductsByAsc = () => {
-        axios
-            .get("/api/productbypriceasc")
-            .then(response => {
-                //handle success
-                this.setState({
-                    list: response.data
-                });
-                console.log("product from get request", response.data);
-            })
-            .catch(response => {
-                //handle error
-                console.log(response);
-            });
+        this.getData("productbypriceasc");
     };
 
     getProducers = () => {
@@ -190,7 +363,7 @@ export class ShopList extends Component {
     };
 
     render() {
-        const { list, producers, types } = this.state;
+        const { list, producers, types, materials, sizes, colors } = this.state;
         console.log("state ==>", this.state);
         const newItem = list.map(item => {
             return (
@@ -242,6 +415,51 @@ export class ShopList extends Component {
                 </li>
             );
         });
+        const materialfilter = materials.map(material => {
+            return (
+                <li>
+                    <FilterFieldGroup
+                        onChange={this.handleInputChangeMaterial}
+                        // id={producer.id}
+                        key={material.id}
+                        label={material.name}
+                        field={material.name}
+                    />
+                </li>
+            );
+        });
+
+        const scrollStyle = {
+            height: "150px"
+        };
+
+        const sizefilter = sizes.map(size => {
+            return (
+                <li>
+                    <FilterFieldGroup
+                        onChange={this.handleInputChangeSize}
+                        // id={producer.id}
+                        key={size}
+                        label={size}
+                        field={size}
+                    />
+                </li>
+            );
+        });
+        const colorfilter = colors.map(color => {
+            return (
+                <li>
+                    <FilterFieldGroup
+                        onChange={this.handleInputChangeColors}
+                        // id={producer.id}
+                        key={color.id}
+                        label={color.name}
+                        field={color.name}
+                    />
+                </li>
+            );
+        });
+
         return (
             <div className="container">
                 <div className="row">
@@ -323,9 +541,25 @@ export class ShopList extends Component {
                             </a>
                         </li>
                         <h5>Бренд</h5>
-                        {producerfilter}
+                        <Scrollbars style={scrollStyle}>
+                            {producerfilter}
+                        </Scrollbars>
                         <h5>Тип</h5>
-                        {typefilter}
+                        <Scrollbars style={scrollStyle}>
+                            {typefilter}
+                        </Scrollbars>
+                        <h5>Матеріал</h5>
+                        <Scrollbars style={scrollStyle}>
+                            {materialfilter}
+                        </Scrollbars>
+                        <h5>Розмір</h5>
+                        <Scrollbars style={scrollStyle}>
+                            {sizefilter}
+                        </Scrollbars>
+                        <h5>Колір</h5>
+                        <Scrollbars style={scrollStyle}>
+                            {colorfilter}
+                        </Scrollbars>
                     </ul>
                     <div className="col-10">
                         <div className="card-columns">{newItem}</div>

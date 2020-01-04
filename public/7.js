@@ -62,23 +62,22 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ "./resources/js/src/components/auth/Login/Login.js":
+/***/ "./resources/js/src/components/auth/Admin/Admin.js":
 /*!*********************************************************!*\
-  !*** ./resources/js/src/components/auth/Login/Login.js ***!
+  !*** ./resources/js/src/components/auth/Admin/Admin.js ***!
   \*********************************************************/
-/*! exports provided: Login, default */
+/*! exports provided: Admin, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Login", function() { return Login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Admin", function() { return Admin; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/TextFieldGroup */ "./resources/js/src/components/common/TextFieldGroup.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _utils_setAuthorizationToken__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../utils/setAuthorizationToken */ "./resources/js/src/utils/setAuthorizationToken.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -103,18 +102,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-var Login =
+var Admin =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Login, _Component);
+  _inherits(Admin, _Component);
 
-  function Login(props) {
+  function Admin(props) {
     var _this;
 
-    _classCallCheck(this, Login);
+    _classCallCheck(this, Admin);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Admin).call(this, props));
 
     _defineProperty(_assertThisInitialized(_this), "checkUserExists", function () {
       var email = _this.state.email;
@@ -128,14 +126,12 @@ function (_Component) {
           "Content-Type": "multipart/form-data"
         }
       }).then(function (response) {
-        //handle success
         _this.setState({
           isSignedUp: true
         });
 
         console.log(response);
       })["catch"](function (response) {
-        //handle error
         console.log(response);
       });
     });
@@ -181,23 +177,14 @@ function (_Component) {
             "Content-Type": "multipart/form-data"
           }
         }).then(function (response) {
-          // history.push("/");
           _this.setState({
             isSignedUp: true
           });
 
           console.log(response);
-          localStorage.setItem("token", response.data.access_token);
-          var token = response.data; //console.log("data login", token);
-          // var user = jwt.decode(token);
-          //console.log('-----user login------', user);
-          // localStorage.setItem("jwtToken", token);
-
-          Object(_utils_setAuthorizationToken__WEBPACK_IMPORTED_MODULE_4__["default"])(token);
         })["catch"](function (response) {
-          //handle error
           console.log(response);
-        }); //ajax axios post
+        });
       } else {
         _this.setState({
           errors: errors
@@ -214,7 +201,7 @@ function (_Component) {
     return _this;
   }
 
-  _createClass(Login, [{
+  _createClass(Admin, [{
     key: "render",
     value: function render() {
       var _this$state2 = this.state,
@@ -224,10 +211,9 @@ function (_Component) {
           isSignedUp = _this$state2.isSignedUp;
 
       if (isSignedUp) {
-        // redirect to home if signed up
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
           to: {
-            pathname: "/userprofile"
+            pathname: "/"
           }
         });
       }
@@ -240,7 +226,7 @@ function (_Component) {
         className: "card  bg-dark"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "\u0412\u0445\u0456\u0434"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "\u0412\u0445\u0456\u0434 \u0430\u0434\u043C\u0456\u043D\u0456\u0441\u0442\u0440\u0430\u0442\u043E\u0440\u0430:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-flex justify-content-end social_icon"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-facebook-official",
@@ -260,7 +246,7 @@ function (_Component) {
         className: "input-group form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
         field: "email",
-        label: "\u0415\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430 \u043F\u043E\u0448\u0442\u0430",
+        label: "\u0415\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430 \u043F\u043E\u0448\u0442\u0430:",
         value: email,
         error: errors.email,
         onChange: this.handleChange
@@ -268,51 +254,37 @@ function (_Component) {
         className: "input-group form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
         field: "password",
-        label: "\u041F\u0430\u0440\u043E\u043B\u044C",
+        label: "\u041F\u0430\u0440\u043E\u043B\u044C:",
         value: password,
         error: errors.password,
         onChange: this.handleChange,
         type: "password"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row align-items-center remember"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "checkbox"
-      }), "\u0417\u0430\u043F\u0430\u043C\u044F\u0442\u0430\u0442\u0438 \u043C\u0435\u043D\u0435"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        // type="submit"
-        className: "btn btn-primary float-right login_btn"
-      }, "\u0423\u0432\u0456\u0439\u0442\u0438"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-footer"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "d-flex justify-content-center links"
-      }, "\u041D\u0435 \u0437\u0430\u0440\u0435\u0454\u0441\u0442\u0440\u043E\u0432\u0430\u043D\u0456?", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-        className: "nav-link",
-        to: "/register"
-      }, "\u0420\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u044F")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "d-flex justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: ""
-      }, "\u0417\u0430\u0431\u0443\u043B\u0438 \u043F\u0430\u0440\u043E\u043B\u044C?"))))))));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+        to: "/dashboard"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary float-center login_btn"
+      }, "\u0412\u0445\u0456\u0434")))))))));
     }
   }]);
 
-  return Login;
+  return Admin;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-/* harmony default export */ __webpack_exports__["default"] = (Login);
+/* harmony default export */ __webpack_exports__["default"] = (Admin);
 
 /***/ }),
 
-/***/ "./resources/js/src/components/auth/Login/index.js":
+/***/ "./resources/js/src/components/auth/Admin/index.js":
 /*!*********************************************************!*\
-  !*** ./resources/js/src/components/auth/Login/index.js ***!
+  !*** ./resources/js/src/components/auth/Admin/index.js ***!
   \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Login */ "./resources/js/src/components/auth/Login/Login.js");
+/* harmony import */ var _Admin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Admin */ "./resources/js/src/components/auth/Admin/Admin.js");
 
-/* harmony default export */ __webpack_exports__["default"] = (_Login__WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (_Admin__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 

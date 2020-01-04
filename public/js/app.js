@@ -2117,7 +2117,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "body {\r\n    width: 100%;\r\n    height: 100vh;\r\n\r\n    /* background: url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg)\r\n        no-repeat 50% 50%; */\r\n    background: url(https://classical.suspilne.media/songs/img/12.jpg) no-repeat\r\n        50% 50%;\r\n    background-size: cover;\r\n\r\n    color: white;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n    width: 100%;\r\n    /* height: 100vh; */\r\n    height: 100%;\r\n    /* background: url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg)\r\n        no-repeat 50% 50%; */\r\n    background: url(https://classical.suspilne.media/songs/img/12.jpg) no-repeat\r\n        50% 50%;\r\n    background-size: cover;\r\n\r\n    color: white;\r\n}\r\n", ""]);
 
 // exports
 
@@ -56187,35 +56187,35 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 var HomePage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./components/Home */ "./resources/js/src/components/Home/index.js"));
+  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./components/Home */ "./resources/js/src/components/Home/index.js"));
 });
 var RegisterPage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(2), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./components/auth/Register */ "./resources/js/src/components/auth/Register/index.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(2), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./components/auth/Register */ "./resources/js/src/components/auth/Register/index.js"));
 });
 var Login = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/auth/Login */ "./resources/js/src/components/auth/Login/index.js"));
+  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./components/auth/Login */ "./resources/js/src/components/auth/Login/index.js"));
 });
 var ShopList = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./components/shopList */ "./resources/js/src/components/shopList/index.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./components/shopList */ "./resources/js/src/components/shopList/index.js"));
 });
 var SingleItem = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./components/shopList/SingleItem */ "./resources/js/src/components/shopList/SingleItem/index.js"));
+  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./components/shopList/SingleItem */ "./resources/js/src/components/shopList/SingleItem/index.js"));
 });
 var BasketPage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./components/basket/BasketPage */ "./resources/js/src/components/basket/BasketPage.js"));
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./components/basket/BasketPage */ "./resources/js/src/components/basket/BasketPage.js"));
 });
 var UserProfile = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./components/UserProfile/UserProfile */ "./resources/js/src/components/UserProfile/UserProfile.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ./components/UserProfile/UserProfile */ "./resources/js/src/components/UserProfile/UserProfile.js"));
 }); // import RegisterPage from "./components/auth/Register";
 // import Login from "./components/auth/Login";
 // import HomePage from "./components/Home";
 
 
 var Admin = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./components/auth/Admin */ "./resources/js/src/components/auth/Admin/index.js"));
+  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/auth/Admin */ "./resources/js/src/components/auth/Admin/index.js"));
 });
 var Table = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./components/auth/Table */ "./resources/js/src/components/auth/Table/index.js"));
+  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./components/auth/Table */ "./resources/js/src/components/auth/Table/index.js"));
 });
 
 var App =

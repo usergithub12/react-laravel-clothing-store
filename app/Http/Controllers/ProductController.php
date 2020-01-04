@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Producer;
 use App\Type;
+use App\Material;
+use App\Color;
 class ProductController extends Controller
 {
     //
@@ -91,4 +93,43 @@ public function getProductsbyType(Request $request){
     return   $products->toJson();
 }
 
+
+public function getMaterials(){
+    $materials = Material::get();
+    return   $materials->toJson();
+}
+
+public function getProductsbyMaterial(Request $request){
+$id= $request->id;
+$products = Product::with('product_data.color','product_data.material','product_data.type','product_data.gender','product_data.producer.country')
+->whereHas('product_data', function($q) use ($id){
+    $q->where('material_id',$id);
+})
+->get();
+return   $products->toJson();
+}
+
+public function getProductsbySize(Request $request){
+    $size= $request->size;
+    $products = Product::with('product_data.color','product_data.material','product_data.type','product_data.gender','product_data.producer.country')
+    ->where('size',$size)
+    ->get();
+    return   $products->toJson();
+    }
+
+
+    public function getColors(){
+        $colors = Color::get();
+        return   $colors->toJson();
+    }
+    
+    public function getProductsbyColor(Request $request){
+    $id= $request->id;
+    $products = Product::with('product_data.color','product_data.material','product_data.type','product_data.gender','product_data.producer.country')
+    ->whereHas('product_data', function($q) use ($id){
+        $q->where('color_id',$id);
+    })
+    ->get();
+    return   $products->toJson();
+    }
 }
