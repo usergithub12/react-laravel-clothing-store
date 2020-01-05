@@ -20,13 +20,22 @@ export class ShopItem extends Component {
                             {type} {name}
                         </h5>
                         <p>
-                            <span className="text-danger">{price}$</span>{" "}
-                            <s>{price}$ </s>
+                            <span className="text-danger">
+                                {price}
+                                <i className="fa fa-usd" aria-hidden="true"></i>
+                            </span>{" "}
+                            <s>
+                                {price}
+                                <i
+                                    className="fa fa-usd"
+                                    aria-hidden="true"
+                                ></i>{" "}
+                            </s>
                         </p>
                         {/* <p>Size: {size}</p>
                         <p>Rating: {rating}</p> */}
                         <Link to={`/Shop/${id}`} className="btn btn-primary">
-                            View Details
+                            Переглянути
                         </Link>
                     </div>
                 </div>

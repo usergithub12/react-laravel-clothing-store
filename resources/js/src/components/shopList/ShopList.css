@@ -1,0 +1,4 @@
+.filter-nav li a:hover {
+    cursor: pointer;
+    color: lightblue;
+}
