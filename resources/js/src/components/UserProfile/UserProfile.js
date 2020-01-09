@@ -62,7 +62,7 @@ export class UserProfile extends Component {
     };
     handleSubmit = e => {
         e.preventDefault();
-        console.log("--register submit--");
+        console.log("--userprofile submit--");
         const {
             fullname,
             email,
