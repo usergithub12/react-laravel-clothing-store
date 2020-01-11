@@ -14,6 +14,10 @@ use Illuminate\Http\Request;
 */
 // Route::post('login', 'LoginController')->name('login');
 
+//CRUD Products
+Route::post('addproduct','ProductController@AddProduct');
+
+/////////////
 Route::get('prod','ProductController@getProducts');
 Route::get('product','ProductController@getProduct');
 //FILTERS
