@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 
 Route::get('prod','ProductController@getProducts');
 Route::get('product','ProductController@getProduct');
+Route::post('product','ProductController@getProduct');
 //FILTERS
 Route::get('productbypricedesc','ProductController@getProductsbyPriceDesc');
 Route::get('productbypriceasc','ProductController@getProductsbyPriceAsc');
