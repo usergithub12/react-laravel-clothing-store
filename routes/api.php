@@ -41,6 +41,10 @@ Route::get('productbysize','ProductController@getProductsbySize');
 //colors
 Route::get('colors','ProductController@getColors');
 Route::get('productbycolor','ProductController@getProductsbyColor');
+//genders
+Route::get('genders','ProductController@getGenders');
+//countries
+Route::get('countries','ProductController@getCountries');
 
 ///
 Route::resource('fileupload', 'FileuploadController');

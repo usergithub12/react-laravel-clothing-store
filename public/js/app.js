@@ -56190,13 +56190,13 @@ var HomePage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
   return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./components/Home */ "./resources/js/src/components/Home/index.js"));
 });
 var RegisterPage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(3), __webpack_require__.e(5), __webpack_require__.e(1), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./components/auth/Register */ "./resources/js/src/components/auth/Register/index.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(3), __webpack_require__.e(6), __webpack_require__.e(1), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./components/auth/Register */ "./resources/js/src/components/auth/Register/index.js"));
 });
 var Login = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
   return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./components/auth/Login */ "./resources/js/src/components/auth/Login/index.js"));
 });
 var ShopList = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./components/shopList */ "./resources/js/src/components/shopList/index.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./components/shopList */ "./resources/js/src/components/shopList/index.js"));
 });
 var SingleItem = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
   return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./components/shopList/SingleItem */ "./resources/js/src/components/shopList/SingleItem/index.js"));
@@ -56218,7 +56218,7 @@ var Table = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
   return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./components/auth/Table */ "./resources/js/src/components/auth/Table/index.js"));
 });
 var AddProduct = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./components/auth/Admin/AddProduct/AddProduct */ "./resources/js/src/components/auth/Admin/AddProduct/AddProduct.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./components/auth/Admin/AddProduct/AddProduct */ "./resources/js/src/components/auth/Admin/AddProduct/AddProduct.js"));
 });
 
 var App =

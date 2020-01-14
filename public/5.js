@@ -190,219 +190,6 @@ module.exports = _typeof;
 
 /***/ }),
 
-/***/ "./node_modules/react-circular-progressbar/dist/index.esm.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/react-circular-progressbar/dist/index.esm.js ***!
-  \*******************************************************************/
-/*! exports provided: CircularProgressbar, CircularProgressbarWithChildren, buildStyles */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CircularProgressbar", function() { return CircularProgressbar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CircularProgressbarWithChildren", function() { return CircularProgressbarWithChildren; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildStyles", function() { return buildStyles; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-
-function __rest(s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
-            t[p[i]] = s[p[i]];
-    return t;
-}
-
-var VIEWBOX_WIDTH = 100;
-var VIEWBOX_HEIGHT = 100;
-var VIEWBOX_HEIGHT_HALF = 50;
-var VIEWBOX_CENTER_X = 50;
-var VIEWBOX_CENTER_Y = 50;
-
-function Path(_a) {
-    var className = _a.className, counterClockwise = _a.counterClockwise, dashRatio = _a.dashRatio, pathRadius = _a.pathRadius, strokeWidth = _a.strokeWidth, style = _a.style;
-    return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("path", { className: className, style: Object.assign({}, style, getDashStyle({ pathRadius: pathRadius, dashRatio: dashRatio, counterClockwise: counterClockwise })), d: getPathDescription({
-            pathRadius: pathRadius,
-            counterClockwise: counterClockwise,
-        }), strokeWidth: strokeWidth, fillOpacity: 0 }));
-}
-function getPathDescription(_a) {
-    var pathRadius = _a.pathRadius, counterClockwise = _a.counterClockwise;
-    var radius = pathRadius;
-    var rotation = counterClockwise ? 1 : 0;
-    return "\n      M " + VIEWBOX_CENTER_X + "," + VIEWBOX_CENTER_Y + "\n      m 0,-" + radius + "\n      a " + radius + "," + radius + " " + rotation + " 1 1 0," + 2 * radius + "\n      a " + radius + "," + radius + " " + rotation + " 1 1 0,-" + 2 * radius + "\n    ";
-}
-function getDashStyle(_a) {
-    var counterClockwise = _a.counterClockwise, dashRatio = _a.dashRatio, pathRadius = _a.pathRadius;
-    var diameter = Math.PI * 2 * pathRadius;
-    var gapLength = (1 - dashRatio) * diameter;
-    return {
-        strokeDasharray: diameter + "px " + diameter + "px",
-        strokeDashoffset: (counterClockwise ? -gapLength : gapLength) + "px",
-    };
-}
-
-var CircularProgressbar = (function (_super) {
-    __extends(CircularProgressbar, _super);
-    function CircularProgressbar() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    CircularProgressbar.prototype.getBackgroundPadding = function () {
-        if (!this.props.background) {
-            return 0;
-        }
-        return this.props.backgroundPadding;
-    };
-    CircularProgressbar.prototype.getPathRadius = function () {
-        return VIEWBOX_HEIGHT_HALF - this.props.strokeWidth / 2 - this.getBackgroundPadding();
-    };
-    CircularProgressbar.prototype.getPathRatio = function () {
-        var _a = this.props, value = _a.value, minValue = _a.minValue, maxValue = _a.maxValue;
-        var boundedValue = Math.min(Math.max(value, minValue), maxValue);
-        return (boundedValue - minValue) / (maxValue - minValue);
-    };
-    CircularProgressbar.prototype.render = function () {
-        var _a = this.props, circleRatio = _a.circleRatio, className = _a.className, classes = _a.classes, counterClockwise = _a.counterClockwise, styles = _a.styles, strokeWidth = _a.strokeWidth, text = _a.text;
-        var pathRadius = this.getPathRadius();
-        var pathRatio = this.getPathRatio();
-        return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("svg", { className: classes.root + " " + className, style: styles.root, viewBox: "0 0 " + VIEWBOX_WIDTH + " " + VIEWBOX_HEIGHT, "data-test-id": "CircularProgressbar" },
-            this.props.background ? (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("circle", { className: classes.background, style: styles.background, cx: VIEWBOX_CENTER_X, cy: VIEWBOX_CENTER_Y, r: VIEWBOX_HEIGHT_HALF })) : null,
-            Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Path, { className: classes.trail, counterClockwise: counterClockwise, dashRatio: circleRatio, pathRadius: pathRadius, strokeWidth: strokeWidth, style: styles.trail }),
-            Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Path, { className: classes.path, counterClockwise: counterClockwise, dashRatio: pathRatio * circleRatio, pathRadius: pathRadius, strokeWidth: strokeWidth, style: styles.path }),
-            text ? (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("text", { className: classes.text, style: styles.text, x: VIEWBOX_CENTER_X, y: VIEWBOX_CENTER_Y }, text)) : null));
-    };
-    CircularProgressbar.defaultProps = {
-        background: false,
-        backgroundPadding: 0,
-        circleRatio: 1,
-        classes: {
-            root: 'CircularProgressbar',
-            trail: 'CircularProgressbar-trail',
-            path: 'CircularProgressbar-path',
-            text: 'CircularProgressbar-text',
-            background: 'CircularProgressbar-background',
-        },
-        counterClockwise: false,
-        className: '',
-        maxValue: 100,
-        minValue: 0,
-        strokeWidth: 8,
-        styles: {
-            root: {},
-            trail: {},
-            path: {},
-            text: {},
-            background: {},
-        },
-        text: '',
-    };
-    return CircularProgressbar;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
-
-function CircularProgressbarWithChildren(props) {
-    var children = props.children, circularProgressbarProps = __rest(props, ["children"]);
-    return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { "data-test-id": "CircularProgressbarWithChildren" },
-        Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { style: { position: 'relative', width: '100%', height: '100%' } },
-            Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(CircularProgressbar, __assign({}, circularProgressbarProps)),
-            props.children ? (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", { "data-test-id": "CircularProgressbarWithChildren__children", style: {
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    marginTop: '-100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                } }, props.children)) : null)));
-}
-
-function buildStyles(_a) {
-    var rotation = _a.rotation, strokeLinecap = _a.strokeLinecap, textColor = _a.textColor, textSize = _a.textSize, pathColor = _a.pathColor, pathTransition = _a.pathTransition, pathTransitionDuration = _a.pathTransitionDuration, trailColor = _a.trailColor, backgroundColor = _a.backgroundColor;
-    var rotationTransform = rotation == null ? undefined : "rotate(" + rotation + "turn)";
-    var rotationTransformOrigin = rotation == null ? undefined : 'center center';
-    return {
-        root: {},
-        path: removeUndefinedValues({
-            stroke: pathColor,
-            strokeLinecap: strokeLinecap,
-            transform: rotationTransform,
-            transformOrigin: rotationTransformOrigin,
-            transition: pathTransition,
-            transitionDuration: pathTransitionDuration == null ? undefined : pathTransitionDuration + "s",
-        }),
-        trail: removeUndefinedValues({
-            stroke: trailColor,
-            strokeLinecap: strokeLinecap,
-            transform: rotationTransform,
-            transformOrigin: rotationTransformOrigin,
-        }),
-        text: removeUndefinedValues({
-            fill: textColor,
-            fontSize: textSize,
-        }),
-        background: removeUndefinedValues({
-            fill: backgroundColor,
-        }),
-    };
-}
-function removeUndefinedValues(obj) {
-    Object.keys(obj).forEach(function (key) {
-        if (obj[key] == null) {
-            delete obj[key];
-        }
-    });
-    return obj;
-}
-
-
-//# sourceMappingURL=index.esm.js.map
-
-
-/***/ }),
-
 /***/ "./node_modules/react-image/umd/index.js":
 /*!***********************************************!*\
   !*** ./node_modules/react-image/umd/index.js ***!
@@ -416,16 +203,518 @@ function removeUndefinedValues(obj) {
 
 /***/ }),
 
-/***/ "./node_modules/react-numeric-captcha/dist/captcha.js":
-/*!************************************************************!*\
-  !*** ./node_modules/react-numeric-captcha/dist/captcha.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./resources/js/src/components/auth/Admin/AddProduct/AddProduct.js":
+/*!*************************************************************************!*\
+  !*** ./resources/js/src/components/auth/Admin/AddProduct/AddProduct.js ***!
+  \*************************************************************************/
+/*! exports provided: AddProduct, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var e,t=__webpack_require__(/*! react */ "./node_modules/react/index.js"),n=(e=t)&&"object"==typeof e&&"default"in e?e.default:e;var r=Object.getOwnPropertySymbols,a=Object.prototype.hasOwnProperty,o=Object.prototype.propertyIsEnumerable;var i=function(){try{if(!Object.assign)return!1;var e=new String("abc");if(e[5]="de","5"===Object.getOwnPropertyNames(e)[0])return!1;for(var t={},n=0;n<10;n++)t["_"+String.fromCharCode(n)]=n;if("0123456789"!==Object.getOwnPropertyNames(t).map(function(e){return t[e]}).join(""))return!1;var r={};return"abcdefghijklmnopqrst".split("").forEach(function(e){r[e]=e}),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},r)).join("")}catch(e){return!1}}()?Object.assign:function(e,t){for(var n,i,c=function(e){if(null==e)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(e)}(e),u=1;u<arguments.length;u++){for(var s in n=Object(arguments[u]))a.call(n,s)&&(c[s]=n[s]);if(r){i=r(n);for(var l=0;l<i.length;l++)o.call(n,i[l])&&(c[i[l]]=n[i[l]])}}return c},c="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED",u=function(){};if(true){var s=c,l={};u=function(e){var t="Warning: "+e;"undefined"!=typeof console&&console.error(t);try{throw new Error(t)}catch(e){}}}var p=function(e,t,n,r,a){if(true)for(var o in e)if(e.hasOwnProperty(o)){var i;try{if("function"!=typeof e[o]){var c=Error((r||"React class")+": "+n+" type `"+o+"` is invalid; it must be a function, usually from the `prop-types` package, but received `"+typeof e[o]+"`.");throw c.name="Invariant Violation",c}i=e[o](t,o,r,n,null,s)}catch(e){i=e}if(!i||i instanceof Error||u((r||"React class")+": type specification of "+n+" `"+o+"` is invalid; the type checker function must return `null` or an `Error` but returned a "+typeof i+". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument)."),i instanceof Error&&!(i.message in l)){l[i.message]=!0;var p=a?a():"";u("Failed "+n+" type: "+i.message+(null!=p?p:""))}}},f=function(){};function d(){return null} true&&(f=function(e){var t="Warning: "+e;"undefined"!=typeof console&&console.error(t);try{throw new Error(t)}catch(e){}});var y=function(e,t){var n="function"==typeof Symbol&&Symbol.iterator,r="@@iterator";var a="<<anonymous>>",o={array:y("array"),bool:y("boolean"),func:y("function"),number:y("number"),object:y("object"),string:y("string"),symbol:y("symbol"),any:l(d),arrayOf:function(e){return l(function(t,n,r,a,o){if("function"!=typeof e)return new s("Property `"+o+"` of component `"+r+"` has invalid PropType notation inside arrayOf.");var i=t[n];if(!Array.isArray(i)){var u=v(i);return new s("Invalid "+a+" `"+o+"` of type `"+u+"` supplied to `"+r+"`, expected an array.")}for(var l=0;l<i.length;l++){var p=e(i,l,r,a,o+"["+l+"]",c);if(p instanceof Error)return p}return null})},element:function(){return l(function(t,n,r,a,o){var i=t[n];if(!e(i)){var c=v(i);return new s("Invalid "+a+" `"+o+"` of type `"+c+"` supplied to `"+r+"`, expected a single ReactElement.")}return null})}(),instanceOf:function(e){return l(function(t,n,r,o,i){if(!(t[n]instanceof e)){var c=e.name||a,u=function(e){if(!e.constructor||!e.constructor.name)return a;return e.constructor.name}(t[n]);return new s("Invalid "+o+" `"+i+"` of type `"+u+"` supplied to `"+r+"`, expected instance of `"+c+"`.")}return null})},node:function(){return l(function(e,t,n,r,a){if(!h(e[t]))return new s("Invalid "+r+" `"+a+"` supplied to `"+n+"`, expected a ReactNode.");return null})}(),objectOf:function(e){return l(function(t,n,r,a,o){if("function"!=typeof e)return new s("Property `"+o+"` of component `"+r+"` has invalid PropType notation inside objectOf.");var i=t[n],u=v(i);if("object"!==u)return new s("Invalid "+a+" `"+o+"` of type `"+u+"` supplied to `"+r+"`, expected an object.");for(var l in i)if(i.hasOwnProperty(l)){var p=e(i,l,r,a,o+"."+l,c);if(p instanceof Error)return p}return null})},oneOf:function(e){if(!Array.isArray(e))return true&&f("Invalid argument supplied to oneOf, expected an instance of array."),d;return l(function(t,n,r,a,o){for(var i=t[n],c=0;c<e.length;c++)if(u(i,e[c]))return null;var l=JSON.stringify(e);return new s("Invalid "+a+" `"+o+"` of value `"+i+"` supplied to `"+r+"`, expected one of "+l+".")})},oneOfType:function(e){if(!Array.isArray(e))return true&&f("Invalid argument supplied to oneOfType, expected an instance of array."),d;for(var t=0;t<e.length;t++){var n=e[t];if("function"!=typeof n)return f("Invalid argument supplied to oneOfType. Expected an array of check functions, but received "+b(n)+" at index "+t+"."),d}return l(function(t,n,r,a,o){for(var i=0;i<e.length;i++){var u=e[i];if(null==u(t,n,r,a,o,c))return null}return new s("Invalid "+a+" `"+o+"` supplied to `"+r+"`.")})},shape:function(e){return l(function(t,n,r,a,o){var i=t[n],u=v(i);if("object"!==u)return new s("Invalid "+a+" `"+o+"` of type `"+u+"` supplied to `"+r+"`, expected `object`.");for(var l in e){var p=e[l];if(p){var f=p(i,l,r,a,o+"."+l,c);if(f)return f}}return null})},exact:function(e){return l(function(t,n,r,a,o){var u=t[n],l=v(u);if("object"!==l)return new s("Invalid "+a+" `"+o+"` of type `"+l+"` supplied to `"+r+"`, expected `object`.");var p=i({},t[n],e);for(var f in p){var d=e[f];if(!d)return new s("Invalid "+a+" `"+o+"` key `"+f+"` supplied to `"+r+"`.\nBad object: "+JSON.stringify(t[n],null,"  ")+"\nValid keys: "+JSON.stringify(Object.keys(e),null,"  "));var y=d(u,f,r,a,o+"."+f,c);if(y)return y}return null})}};function u(e,t){return e===t?0!==e||1/e==1/t:e!=e&&t!=t}function s(e){this.message=e,this.stack=""}function l(e){if(true)var n={},r=0;function o(o,i,u,l,p,d,y){if(l=l||a,d=d||u,y!==c){if(t){var h=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use `PropTypes.checkPropTypes()` to call them. Read more at http://fb.me/use-check-prop-types");throw h.name="Invariant Violation",h}if( true&&"undefined"!=typeof console){var v=l+":"+u;!n[v]&&r<3&&(f("You are manually calling a React.PropTypes validation function for the `"+d+"` prop on `"+l+"`. This is deprecated and will throw in the standalone `prop-types` package. You may be seeing this warning due to a third-party PropTypes library. See https://fb.me/react-warning-dont-call-proptypes for details."),n[v]=!0,r++)}}return null==i[u]?o?new s(null===i[u]?"The "+p+" `"+d+"` is marked as required in `"+l+"`, but its value is `null`.":"The "+p+" `"+d+"` is marked as required in `"+l+"`, but its value is `undefined`."):null:e(i,u,l,p,d)}var i=o.bind(null,!1);return i.isRequired=o.bind(null,!0),i}function y(e){return l(function(t,n,r,a,o,i){var c=t[n];return v(c)!==e?new s("Invalid "+a+" `"+o+"` of type `"+m(c)+"` supplied to `"+r+"`, expected `"+e+"`."):null})}function h(t){switch(typeof t){case"number":case"string":case"undefined":return!0;case"boolean":return!t;case"object":if(Array.isArray(t))return t.every(h);if(null===t||e(t))return!0;var a=function(e){var t=e&&(n&&e[n]||e[r]);if("function"==typeof t)return t}(t);if(!a)return!1;var o,i=a.call(t);if(a!==t.entries){for(;!(o=i.next()).done;)if(!h(o.value))return!1}else for(;!(o=i.next()).done;){var c=o.value;if(c&&!h(c[1]))return!1}return!0;default:return!1}}function v(e){var t=typeof e;return Array.isArray(e)?"array":e instanceof RegExp?"object":function(e,t){return"symbol"===e||"Symbol"===t["@@toStringTag"]||"function"==typeof Symbol&&t instanceof Symbol}(t,e)?"symbol":t}function m(e){if(null==e)return""+e;var t=v(e);if("object"===t){if(e instanceof Date)return"date";if(e instanceof RegExp)return"regexp"}return t}function b(e){var t=m(e);switch(t){case"array":case"object":return"an "+t;case"boolean":case"date":case"regexp":return"a "+t;default:return t}}return s.prototype=Error.prototype,o.checkPropTypes=p,o.PropTypes=o,o};function h(){}var v=function(e,t){return e(t={exports:{}},t.exports),t.exports}(function(e){if(true){var t="function"==typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103;e.exports=y(function(e){return"object"==typeof e&&null!==e&&e.$$typeof===t},!0)}else {}});function m(e,t){return e=Math.ceil(e),t=Math.floor(t),Math.floor(Math.random()*(t-e))+e}var b=function(e){function t(){for(var t=this,n=[],r=arguments.length;r--;)n[r]=arguments[r];e.apply(this,n),this.state={solution:m(111111,999999),input:""},this.componentDidMount=function(){t.drawCaptcha()},this.drawCaptcha=function(){var e=t.state.solution,n=t.canvas,r=n.width,a=n.height,o=t.canvas.getContext("2d");o.clearRect(0,0,r,a),o.font="40px serif",o.textAlign="center",o.textBaseline="middle",o.fillText(e,r/2,a/2+3),o.strokeStyle="#000000",o.beginPath(),o.moveTo(m(5,20),m(5,20)),o.lineTo(r-m(5,20),a-m(5,20)),o.stroke(),o.moveTo(m(5,20),a-m(5,20)),o.lineTo(r-m(5,20),m(5,20)),o.stroke(),o.closePath()},this.refresh=function(){t.setState({solution:m(111111,999999),input:""},t.drawCaptcha)},this.playAudio=function(){var e=new SpeechSynthesisUtterance(t.state.solution.toString().split("").join(" "));e.rate=.25,window.speechSynthesis.speak(e)},this.handleChange=function(e){var n=t.props.onChange,r=t.state.solution;t.setState({input:e.target.value}),n(e.target.value===r.toString())}}return e&&(t.__proto__=e),(t.prototype=Object.create(e&&e.prototype)).constructor=t,t.prototype.render=function(){var e=this,t=this.props.placeholder,r=this.state.input;return n.createElement("div",{className:"rnc"},n.createElement("div",{className:"rnc-row"},n.createElement("canvas",{ref:function(t){return e.canvas=t},width:200,height:50,className:"rnc-canvas","data-testid":"captcha-canvas"}),n.createElement("div",{className:"rnc-column"},n.createElement("button",{type:"button","aria-label":"get new captcha",onClick:this.refresh,className:"rnc-button","data-testid":"captcha-refresh"},n.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 24 24"},n.createElement("g",{"data-name":"Layer 2"},n.createElement("g",{"data-name":"refresh"},n.createElement("rect",{width:"24",height:"24",opacity:"0"}),n.createElement("path",{d:"M20.3 13.43a1 1 0 0 0-1.25.65A7.14 7.14 0 0 1 12.18 19 7.1 7.1 0 0 1 5 12a7.1 7.1 0 0 1 7.18-7 7.26 7.26 0 0 1 4.65 1.67l-2.17-.36a1 1 0 0 0-1.15.83 1 1 0 0 0 .83 1.15l4.24.7h.17a1 1 0 0 0 .34-.06.33.33 0 0 0 .1-.06.78.78 0 0 0 .2-.11l.09-.11c0-.05.09-.09.13-.15s0-.1.05-.14a1.34 1.34 0 0 0 .07-.18l.75-4a1 1 0 0 0-2-.38l-.27 1.45A9.21 9.21 0 0 0 12.18 3 9.1 9.1 0 0 0 3 12a9.1 9.1 0 0 0 9.18 9A9.12 9.12 0 0 0 21 14.68a1 1 0 0 0-.7-1.25z"}))))),n.createElement("button",{type:"button","aria-label":"play audio",onClick:this.playAudio,className:"rnc-button","data-testid":"captcha-audio"},n.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 24 24"},n.createElement("g",{"data-name":"Layer 2"},n.createElement("g",{"data-name":"volume-up"},n.createElement("rect",{width:"24",height:"24",opacity:"0"}),n.createElement("path",{d:"M18.28 8.37a1 1 0 1 0-1.56 1.26 4 4 0 0 1 0 4.74A1 1 0 0 0 17.5 16a1 1 0 0 0 .78-.37 6 6 0 0 0 0-7.26z"}),n.createElement("path",{d:"M19.64 5.23a1 1 0 1 0-1.28 1.54A6.8 6.8 0 0 1 21 12a6.8 6.8 0 0 1-2.64 5.23 1 1 0 0 0-.13 1.41A1 1 0 0 0 19 19a1 1 0 0 0 .64-.23A8.75 8.75 0 0 0 23 12a8.75 8.75 0 0 0-3.36-6.77z"}),n.createElement("path",{d:"M15 3.12a1 1 0 0 0-1 0L7.52 7.57h-5a1 1 0 0 0-1 1v6.86a1 1 0 0 0 1 1h5l6.41 4.4a1.06 1.06 0 0 0 .57.17 1 1 0 0 0 1-1V4a1 1 0 0 0-.5-.88zm-1.47 15L8.4 14.6a1 1 0 0 0-.57-.17H3.5V9.57h4.33a1 1 0 0 0 .57-.17l5.1-3.5z"}))))))),n.createElement("input",{type:"number",value:r,onChange:this.handleChange,placeholder:t,className:"rnc-input","data-testid":"captcha-input"}))},t}(t.Component);b.defaultProps={placeholder:"Insert captcha"},b.propTypes={onChange:v.func.isRequired,placeholder:v.string},module.exports=b;
-//# sourceMappingURL=captcha.js.map
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddProduct", function() { return AddProduct; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/TextFieldGroup */ "./resources/js/src/components/common/TextFieldGroup.js");
+/* harmony import */ var _common_cropper_CropperModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/cropper/CropperModal */ "./resources/js/src/components/common/cropper/CropperModal.js");
+/* harmony import */ var react_image__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-image */ "./node_modules/react-image/umd/index.js");
+/* harmony import */ var react_image__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_image__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _common_SelectFieldGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common/SelectFieldGroup */ "./resources/js/src/components/common/SelectFieldGroup.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var AddProduct =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(AddProduct, _Component);
+
+  function AddProduct() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, AddProduct);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(AddProduct)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      product: {
+        name: "",
+        size: "",
+        image: "",
+        price: "",
+        rating: "",
+        color: "",
+        material: "",
+        type: "",
+        producer: "",
+        country: ""
+      },
+      colors: [],
+      materials: [],
+      types: [],
+      producers: [],
+      genders: [],
+      countries: [],
+      errors: {}
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getColors", function () {
+      axios.get("/api/colors").then(function (response) {
+        //handle success
+        _this.setState({
+          colors: response.data
+        });
+
+        console.log("product from get request", response.data);
+      })["catch"](function (response) {
+        //handle error
+        console.log(response);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getMaterials", function () {
+      axios.get("/api/materials").then(function (response) {
+        //handle success
+        _this.setState({
+          materials: response.data
+        });
+
+        console.log("product from get request", response.data);
+      })["catch"](function (response) {
+        //handle error
+        console.log(response);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getTypes", function () {
+      axios.get("/api/types").then(function (response) {
+        //handle success
+        _this.setState({
+          types: response.data
+        });
+
+        console.log("product from get request", response.data);
+      })["catch"](function (response) {
+        //handle error
+        console.log(response);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getProducers", function () {
+      axios.get("/api/producers").then(function (response) {
+        //handle success
+        _this.setState({
+          producers: response.data
+        });
+
+        console.log("product from get request", response.data);
+      })["catch"](function (response) {
+        //handle error
+        console.log(response);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getGenders", function () {
+      axios.get("/api/genders").then(function (response) {
+        //handle success
+        _this.setState({
+          genders: response.data
+        });
+
+        console.log("product from get request", response.data);
+      })["catch"](function (response) {
+        //handle error
+        console.log(response);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getCountries", function () {
+      axios.get("/api/countries").then(function (response) {
+        //handle success
+        _this.setState({
+          countries: response.data
+        });
+
+        console.log("product from get request", response.data);
+      })["catch"](function (response) {
+        //handle error
+        console.log(response);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onChangeFile", function (e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      var file = files[0];
+
+      _this.createImage(file);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "createImage", function (file) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        _this.setState({
+          image: e.target.result
+        });
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "fileUpload", function (image) {
+      var url = "api/fileupload";
+      var formData = {
+        file: image
+      };
+      return axios.post(url, formData).then(function (response) {
+        return console.log(response);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "setStateByErrors", function (name, value) {
+      if (!!_this.state.errors[name]) {
+        var _this$setState;
+
+        var errors = Object.assign({}, _this.state.errors);
+        delete errors[name];
+
+        _this.setState((_this$setState = {}, _defineProperty(_this$setState, name, value), _defineProperty(_this$setState, "errors", errors), _this$setState));
+      } else {
+        console.log("set value by NAME:", name);
+
+        _this.setState(_defineProperty({}, name, value));
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleChange", function (e) {
+      _this.setStateByErrors(e.target.name, e.target.value);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleColorSelectChange", function (value) {
+      _this.setState({
+        color: value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleMaterialSelectChange", function (value) {
+      _this.setState({
+        material: value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleGenderSelectChange", function (value) {
+      _this.setState({
+        gender: value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleProducerSelectChange", function (value) {
+      _this.setState({
+        producer: value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleCountrySelectChange", function (value) {
+      _this.setState({
+        country: value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleTypeSelectChange", function (value) {
+      _this.setState({
+        type: value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (e) {
+      e.preventDefault();
+      console.log("--register submit--");
+      var _this$state = _this.state,
+          name = _this$state.name,
+          size = _this$state.size,
+          price = _this$state.price,
+          rating = _this$state.rating,
+          color = _this$state.color,
+          material = _this$state.material,
+          type = _this$state.type,
+          producer = _this$state.producer,
+          country = _this$state.country,
+          image = _this$state.image,
+          gender = _this$state.gender;
+      var errors = {};
+      if (name === "") errors.name = "Поле не може бути пустим!";
+      if (size === "") errors.size = "Поле не може бути пустим!";
+      if (price === "") errors.price = "Поле не може бути пустим!";
+      if (rating === "") errors.rating = "Поле не може бути пустим!";
+      if (color === "") errors.color = "Поле не може бути пустим!";
+      if (material === "") errors.material = "Поле не може бути пустим!";
+      if (type === "") errors.type = "Поле не може бути пустим!";
+      if (producer === "") errors.producer = "Поле не може бути пустим!";
+      if (country === "") errors.country = "Поле не може бути пустим!";
+      if (image === "") errors.image = "Поле не може бути пустим!";
+      var isValid = Object.keys(errors).length === 0;
+
+      if (isValid) {
+        console.log("Model is Valid"); //ajax axios post
+
+        var model = {
+          name: name,
+          size: size,
+          price: price,
+          rating: rating,
+          color: color,
+          material: material,
+          type: type,
+          producer: producer,
+          country: country,
+          image: image,
+          gender: gender
+        };
+        axios.post("/api/addproduct", model).then(function (resp) {
+          _this.fileUpload(image);
+
+          console.log("----server responce----", resp);
+        }, function (error) {
+          console.log("----server error----", error);
+        }); //Uplaod Image
+      } else {
+        _this.setState({
+          errors: errors
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getCroppedImage", function (img) {
+      _this.setState({
+        image: img
+      });
+    });
+
+    return _this;
+  }
+
+  _createClass(AddProduct, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getColors();
+      this.getMaterials();
+      this.getTypes();
+      this.getProducers();
+      this.getGenders();
+      this.getCountries();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state2 = this.state,
+          name = _this$state2.name,
+          size = _this$state2.size,
+          price = _this$state2.price,
+          rating = _this$state2.rating,
+          errors = _this$state2.errors,
+          image = _this$state2.image,
+          colors = _this$state2.colors,
+          materials = _this$state2.materials,
+          types = _this$state2.types,
+          producers = _this$state2.producers,
+          genders = _this$state2.genders,
+          countries = _this$state2.countries;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        name: "form",
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-flex justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "w-40"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_image__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        className: "rounded-circle",
+        width: "100",
+        src: image,
+        unloader: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          width: "100" // src="http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png"
+          ,
+          src: "https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/NO_IMG_600x600.png"
+        })
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_cropper_CropperModal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        getCroppedImage: this.getCroppedImage
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        field: "name",
+        label: "\u041D\u0430\u0437\u0432\u0430",
+        value: name,
+        error: errors.name,
+        onChange: this.handleChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        field: "size",
+        label: "\u0420\u043E\u0437\u043C\u0456\u0440",
+        value: size,
+        error: errors.size,
+        onChange: this.handleChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        field: "price",
+        label: "\u0426\u0456\u043D\u0430",
+        value: price,
+        error: errors.price,
+        onChange: this.handleChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_TextFieldGroup__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        field: "rating",
+        label: "\u0420\u0435\u0439\u0442\u0438\u043D\u0433",
+        value: rating,
+        error: errors.rating,
+        onChange: this.handleChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_SelectFieldGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fieldname: "color",
+        arrayOfData: colors,
+        selected: "\u041A\u043E\u043B\u0456\u0440",
+        onSelectChange: this.handleColorSelectChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_SelectFieldGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fieldname: "material",
+        arrayOfData: materials,
+        selected: "\u041C\u0430\u0442\u0435\u0440\u0456\u0430\u043B",
+        onSelectChange: this.handleMaterialSelectChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_SelectFieldGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fieldname: "type",
+        arrayOfData: types,
+        selected: "\u0422\u0438\u043F",
+        onSelectChange: this.handleTypeSelectChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_SelectFieldGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        arrayOfData: producers,
+        selected: "\u0412\u0438\u0440\u043E\u0431\u043D\u0438\u043A",
+        fieldname: "producer",
+        onSelectChange: this.handleProducerSelectChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_SelectFieldGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fieldname: "gender",
+        arrayOfData: genders,
+        selected: "\u0421\u0442\u0430\u0442\u044C",
+        onSelectChange: this.handleGenderSelectChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_SelectFieldGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fieldname: "country",
+        arrayOfData: countries,
+        selected: "\u041A\u0440\u0430\u0457\u043D\u0430",
+        onSelectChange: this.handleCountrySelectChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group  d-flex justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary "
+      }, "\u0414\u043E\u0434\u0430\u0442\u0438"))));
+    }
+  }]);
+
+  return AddProduct;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+/* harmony default export */ __webpack_exports__["default"] = (AddProduct);
+
+/***/ }),
+
+/***/ "./resources/js/src/components/common/SelectFieldGroup.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/src/components/common/SelectFieldGroup.js ***!
+  \****************************************************************/
+/*! exports provided: SelectFieldGroup, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectFieldGroup", function() { return SelectFieldGroup; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var SelectFieldGroup =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(SelectFieldGroup, _Component);
+
+  function SelectFieldGroup(props) {
+    var _this;
+
+    _classCallCheck(this, SelectFieldGroup);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SelectFieldGroup).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
+      var selectedValue = event.target.value;
+
+      _this.props.onSelectChange(selectedValue);
+    });
+
+    return _this;
+  }
+
+  _createClass(SelectFieldGroup, [{
+    key: "render",
+    value: function render() {
+      var fieldname = this.props.fieldname;
+      var selected = this.props.selected;
+      var arrayOfData = this.props.arrayOfData;
+      var options = arrayOfData.map(function (data) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: data.id,
+          value: data.id
+        }, data.name);
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, selected), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        id: fieldname,
+        name: fieldname,
+        className: "form-control",
+        onChange: this.handleChange
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "\u0412\u0438\u0431\u0435\u0440\u0456\u0442\u044C ", selected), options));
+    }
+  }]);
+
+  return SelectFieldGroup;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+/* harmony default export */ __webpack_exports__["default"] = (SelectFieldGroup);
 
 /***/ })
 

@@ -11,6 +11,8 @@ use App\Color;
 use App\Gender;
 use App\ProductData;
 use App\Country;
+use App\Fileupload;
+
 class ProductController extends Controller
 {
     //
@@ -25,71 +27,51 @@ class ProductController extends Controller
         //     'rating' => 'required',
         //     'main_image' => 'required',
         //   ]);
-
+        $image = Fileupload::latest('id')->first()->filename;
           $product=new Product();
 
           $product->name=$request->name;
           $product->price=$request->price;
           $product->size=$request->size;
           $product->rating=$request->rating;
-          $product->main_image=$request->main_image;
-          $product->images=$request->main_image;
+          $product->main_image=$image;
+          $product->images=$image;
 //belongs to
         //   $user->account()->associate($account);
 
         $product_data = new ProductData();
         //color
-        $color=new Color();
-        $color->name=$request->color;
+       // $color=Color::where('name',$request->color)->first();
+       $color=Color::find($request->color);
         $product_data->color()->associate($color);
-        //$color->save();
+      
          //material
-         $material=new Material();
-         $material->name=$request->material;
+       //  $material=Material::where('name',$request->material)->first();
+       $material=Material::find($request->material);
          $product_data->material()->associate($material);
        //  $material->save();
           //Type
-          $type=new Type();
-          $type->name=$request->type;
+        //  $type=Type::where('name',$request->type)->first();
+          $type=Type::find($request->type);
           $product_data->type()->associate($type);
         //  $type->save();
            //Gender
-         $gender=new Gender();
-         $gender->name=$request->gender;
+         //  $gender=Gender::where('name',$request->gender)->first();
+         $gender=Gender::find($request->gender);
          $product_data->gender()->associate($gender);
        //  $gender->save();
           //Country
-          $producer=new Producer();
-          $country=new Country();
-          $country->name=$request->country;
-          $producer->name=$request->producer;
-       //   $country->save();
+        //   $producer=Producer::where('name',$request->producer)->first();
+        $producer=Producer::find($request->producer);
+       // $country=Country::where('name',$request->country)->first();
+          $country=Country::find($request->country);
           $producer->country()->associate($country);
-        //  $producer->save();
-            //Producer
-         
-          $producer->name=$request->producer;
-          
           $product_data->producer()->associate($producer);
-       
-        
-       
-       
-      
-
-        // $product = Product::create([
-        //     'name' => $validatedData['name'],
-        //     'price' => $validatedData['price'],
-        //     'size' => $validatedData['size'],
-        //     'rating' => $validatedData['rating'],
-        //     'main_image' => $validatedData['main_image'],
-        //     ]);
-        $product_data->save();
-        $product_data->products()->save($product);
-        $product->save();
-        // $product->attach($product_data->Id);
-        $product->product_data()->save($product_data);
-    //    $product->push();
+          $product_data->save();
+          $product->product_data()->associate($product_data);
+          $product->save();
+        //   $product_data->products()->associate($product);
+ 
              
    return response()->json('Product created!');
     }
@@ -151,6 +133,11 @@ public function getProducers(){
     return   $producers->toJson();
 }
 
+public function getGenders(){
+    $genders = Gender::get();
+    return   $genders->toJson();
+}
+
 public function getProductsbyProducer(Request $request){
     $id= $request->id;
     $products = Product::with('product_data.color','product_data.material','product_data.type','product_data.gender','product_data.producer.country')
@@ -164,6 +151,11 @@ public function getProductsbyProducer(Request $request){
 public function getTypes(){
         $types = Type::get();
         return   $types->toJson();
+}
+
+public function getCountries(){
+    $countries = Country::get();
+    return   $countries->toJson();
 }
 
 public function getProductsbyType(Request $request){

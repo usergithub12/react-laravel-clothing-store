@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import TextFieldGroup from "../../../common/TextFieldGroup";
 import CropperModal from "../../../common/cropper/CropperModal";
 import Img from "react-image";
+import SelectFieldGroup from "../../../common/SelectFieldGroup";
+
 export class AddProduct extends Component {
     state = {
         product: {
@@ -16,7 +18,114 @@ export class AddProduct extends Component {
             producer: "",
             country: ""
         },
+        colors: [],
+        materials: [],
+        types: [],
+        producers: [],
+        genders: [],
+        countries: [],
         errors: {}
+    };
+
+    componentDidMount() {
+        this.getColors();
+        this.getMaterials();
+        this.getTypes();
+        this.getProducers();
+        this.getGenders();
+        this.getCountries();
+    }
+
+    getColors = () => {
+        axios
+            .get("/api/colors")
+            .then(response => {
+                //handle success
+                this.setState({
+                    colors: response.data
+                });
+                console.log("product from get request", response.data);
+            })
+            .catch(response => {
+                //handle error
+                console.log(response);
+            });
+    };
+
+    getMaterials = () => {
+        axios
+            .get("/api/materials")
+            .then(response => {
+                //handle success
+                this.setState({
+                    materials: response.data
+                });
+                console.log("product from get request", response.data);
+            })
+            .catch(response => {
+                //handle error
+                console.log(response);
+            });
+    };
+    getTypes = () => {
+        axios
+            .get("/api/types")
+            .then(response => {
+                //handle success
+                this.setState({
+                    types: response.data
+                });
+                console.log("product from get request", response.data);
+            })
+            .catch(response => {
+                //handle error
+                console.log(response);
+            });
+    };
+    getProducers = () => {
+        axios
+            .get("/api/producers")
+            .then(response => {
+                //handle success
+                this.setState({
+                    producers: response.data
+                });
+                console.log("product from get request", response.data);
+            })
+            .catch(response => {
+                //handle error
+                console.log(response);
+            });
+    };
+    getGenders = () => {
+        axios
+            .get("/api/genders")
+            .then(response => {
+                //handle success
+                this.setState({
+                    genders: response.data
+                });
+                console.log("product from get request", response.data);
+            })
+            .catch(response => {
+                //handle error
+                console.log(response);
+            });
+    };
+    getCountries = () => {
+        axios
+            .get("/api/countries")
+            .then(response => {
+                //handle success
+                this.setState({
+                    countries: response.data
+                });
+                console.log("product from get request", response.data);
+            })
+            .catch(response => {
+                //handle error
+                console.log(response);
+            });
     };
     onChangeFile = e => {
         let files = e.target.files || e.dataTransfer.files;
@@ -50,12 +159,33 @@ export class AddProduct extends Component {
                 errors
             });
         } else {
+            console.log("set value by NAME:", name);
             this.setState({ [name]: value });
         }
     };
     handleChange = e => {
         this.setStateByErrors(e.target.name, e.target.value);
     };
+
+    handleColorSelectChange = value => {
+        this.setState({ color: value });
+    };
+    handleMaterialSelectChange = value => {
+        this.setState({ material: value });
+    };
+    handleGenderSelectChange = value => {
+        this.setState({ gender: value });
+    };
+    handleProducerSelectChange = value => {
+        this.setState({ producer: value });
+    };
+    handleCountrySelectChange = value => {
+        this.setState({ country: value });
+    };
+    handleTypeSelectChange = value => {
+        this.setState({ type: value });
+    };
+
     handleSubmit = e => {
         e.preventDefault();
         console.log("--register submit--");
@@ -69,7 +199,8 @@ export class AddProduct extends Component {
             type,
             producer,
             country,
-            image
+            image,
+            gender
         } = this.state;
         let errors = {};
         if (name === "") errors.name = "Поле не може бути пустим!";
@@ -95,7 +226,9 @@ export class AddProduct extends Component {
                 material,
                 type,
                 producer,
-                country
+                country,
+                image,
+                gender
             };
             axios.post("/api/addproduct", model).then(
                 resp => {
@@ -120,13 +253,15 @@ export class AddProduct extends Component {
             size,
             price,
             rating,
-            color,
-            material,
-            type,
-            producer,
-            country,
+
             errors,
-            image
+            image,
+            colors,
+            materials,
+            types,
+            producers,
+            genders,
+            countries
         } = this.state;
         return (
             <div>
@@ -179,41 +314,45 @@ export class AddProduct extends Component {
                         error={errors.rating}
                         onChange={this.handleChange}
                     />
-                    <TextFieldGroup
-                        field="color"
-                        label="Колір"
-                        value={color}
-                        error={errors.color}
-                        onChange={this.handleChange}
+                    <SelectFieldGroup
+                        fieldname="color"
+                        arrayOfData={colors}
+                        selected="Колір"
+                        onSelectChange={this.handleColorSelectChange}
                     />
-                    <TextFieldGroup
-                        field="material"
-                        label="Матеріал"
-                        value={material}
-                        error={errors.material}
-                        onChange={this.handleChange}
+
+                    <SelectFieldGroup
+                        fieldname="material"
+                        arrayOfData={materials}
+                        selected="Матеріал"
+                        onSelectChange={this.handleMaterialSelectChange}
                     />
-                    <TextFieldGroup
-                        field="type"
-                        label="Тип"
-                        value={type}
-                        error={errors.type}
-                        onChange={this.handleChange}
+                    <SelectFieldGroup
+                        fieldname="type"
+                        arrayOfData={types}
+                        selected="Тип"
+                        onSelectChange={this.handleTypeSelectChange}
                     />
-                    <TextFieldGroup
-                        field="producer"
-                        label="Виробник"
-                        value={producer}
-                        error={errors.producer}
-                        onChange={this.handleChange}
+                    <SelectFieldGroup
+                        arrayOfData={producers}
+                        selected="Виробник"
+                        fieldname="producer"
+                        onSelectChange={this.handleProducerSelectChange}
                     />
-                    <TextFieldGroup
-                        field="country"
-                        label="Країна"
-                        value={country}
-                        error={errors.country}
-                        onChange={this.handleChange}
+                    <SelectFieldGroup
+                        fieldname="gender"
+                        arrayOfData={genders}
+                        selected="Стать"
+                        onSelectChange={this.handleGenderSelectChange}
                     />
+
+                    <SelectFieldGroup
+                        fieldname="country"
+                        arrayOfData={countries}
+                        selected="Країна"
+                        onSelectChange={this.handleCountrySelectChange}
+                    />
+
                     <div className="form-group  d-flex justify-content-center">
                         <button className="btn btn-primary ">Додати</button>
                     </div>
