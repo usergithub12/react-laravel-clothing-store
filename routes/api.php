@@ -14,30 +14,34 @@ use Illuminate\Http\Request;
 */
 // Route::post('login', 'LoginController')->name('login');
 
-Route::get('prod','ProductController@getProducts');
-Route::get('product','ProductController@getProduct');
-Route::post('product','ProductController@getProduct');
+
+
+Route::post('cartproducts', 'ProductController@getProductsForCart');
+
+Route::get('prod', 'ProductController@getProducts');
+Route::get('product', 'ProductController@getProduct');
+Route::post('product', 'ProductController@getProduct');
 //FILTERS
-Route::get('productbypricedesc','ProductController@getProductsbyPriceDesc');
-Route::get('productbypriceasc','ProductController@getProductsbyPriceAsc');
+Route::get('productbypricedesc', 'ProductController@getProductsbyPriceDesc');
+Route::get('productbypriceasc', 'ProductController@getProductsbyPriceAsc');
 //gender
-Route::get('productbymen','ProductController@getProductsforMens');
-Route::get('productbywomen','ProductController@getProductsforWomens');
-Route::get('productbykids','ProductController@getProductsforKids');
+Route::get('productbymen', 'ProductController@getProductsforMens');
+Route::get('productbywomen', 'ProductController@getProductsforWomens');
+Route::get('productbykids', 'ProductController@getProductsforKids');
 //producers
-Route::get('producers','ProductController@getProducers');
-Route::get('productbyproducer','ProductController@getProductsbyProducer');
+Route::get('producers', 'ProductController@getProducers');
+Route::get('productbyproducer', 'ProductController@getProductsbyProducer');
 ///types
-Route::get('types','ProductController@getTypes');
-Route::get('productbytype','ProductController@getProductsbyType');
+Route::get('types', 'ProductController@getTypes');
+Route::get('productbytype', 'ProductController@getProductsbyType');
 ////materials
-Route::get('materials','ProductController@getMaterials');
-Route::get('productbymaterial','ProductController@getProductsbyMaterial');
+Route::get('materials', 'ProductController@getMaterials');
+Route::get('productbymaterial', 'ProductController@getProductsbyMaterial');
 ///sizes
-Route::get('productbysize','ProductController@getProductsbySize');
+Route::get('productbysize', 'ProductController@getProductsbySize');
 //colors
-Route::get('colors','ProductController@getColors');
-Route::get('productbycolor','ProductController@getProductsbyColor');
+Route::get('colors', 'ProductController@getColors');
+Route::get('productbycolor', 'ProductController@getProductsbyColor');
 
 ///
 Route::resource('fileupload', 'FileuploadController');
@@ -47,7 +51,7 @@ Route::post('login', 'AuthController@login');
 Route::get('logout', 'AuthController@logout');
 Route::get('user', 'AuthController@getAuthUser');
 
- Route::post('userexists', 'UserController@CheckIfUserExists');
+Route::post('userexists', 'UserController@CheckIfUserExists');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

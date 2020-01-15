@@ -28,16 +28,12 @@ export class SingleItem extends Component {
 
         console.log("add to cart id", id);
 
-        // cart[id] = cart[id] ? cart[id] : 0;
-        // let qty = cart[id] + parseInt(this.state.quantity);
-        // // if (this.props.product.available_quantity < qty) {
-        // //     cart[id] = this.props.product.available_quantity;
-        // // } else {
-        // cart[id] = qty;
-        // // }
-        cart = id;
-        console.log("cart", cart);
-        localStorage.setItem("cart", JSON.parse(cart));
+        cart[id] = cart[id] ? cart[id] : 0;
+        //  let qty = cart[id] + parseInt(this.state.quantity);
+
+        cart[id] = id;
+
+        localStorage.setItem("cart", JSON.stringify(cart));
     };
 
     componentDidMount() {
