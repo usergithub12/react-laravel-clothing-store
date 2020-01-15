@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
+import "./Table.css";
 // import ProductModal from "../../shopList/SingleItem/ProductModal"
 class Table extends Component {
     state = {
@@ -134,7 +136,10 @@ class Table extends Component {
 
                 <div className="row">
                     {products ? (
-                        <table className="table table-striped   table-dark">
+                        <table
+                            id="prodtable"
+                            className="table table-striped table-sm table-dark"
+                        >
                             <tbody>
                                 <tr>{this.renderTableHeader()}</tr>
                                 {this.renderTableData()}
