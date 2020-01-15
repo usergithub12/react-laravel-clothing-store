@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+// import ProductModal from "../../shopList/SingleItem/ProductModal"
 class Table extends Component {
     state = {
         products: null
@@ -20,6 +21,29 @@ class Table extends Component {
                 console.log(response);
             });
     }
+
+    deleteProduct = product => {
+        var $this = this;
+        axios
+            .delete("/api/deleteproduct", {
+                params: {
+                    id: product.id
+                }
+            })
+            .then(response => {
+                const newState = this.state.products.slice();
+                newState.splice(newState.indexOf(product), 1);
+                $this.setState({
+                    products: newState
+                });
+                console.log("delete request", response.data);
+            })
+            .catch(response => {
+                //handle error
+                console.log(response);
+            });
+    };
+
     renderTableData() {
         const { products } = this.state;
         const imgStyle = {
@@ -55,8 +79,15 @@ class Table extends Component {
                     <td> {product_data.producer.country.name}</td>
                     <td>
                         <button className="btn btn-primary">Редагувати</button>{" "}
-                        <button className="btn btn-danger">Видалити</button>{" "}
-                        <button className="btn btn-info">Деталі</button>
+                        <button
+                            className="btn btn-danger"
+                            onClick={this.deleteProduct.bind(this, product)}
+                        >
+                            Видалити
+                        </button>{" "}
+                        <Link to={`/Shop/${id}`} className="btn btn-info">
+                            Деталі
+                        </Link>
                     </td>
                 </tr>
             );
