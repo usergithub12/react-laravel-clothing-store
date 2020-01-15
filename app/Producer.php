@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Producer extends Model
 {
     //
+    public $timestamps = false;
     protected $fillable = ['name','country'];
     public function product_data()
     {
