@@ -230,4 +230,17 @@ class ProductController extends Controller
         $product->delete();
         return response()->json('Product deleted!');
     }
+    public function getProductsForCart(Request $request)
+    {
+        $products = [];
+        $cart = json_decode($request->cart, true);
+        foreach ($cart as $item) {
+            $product =  Product::with('product_data.color', 'product_data.material', 'product_data.type', 'product_data.gender', 'product_data.producer.country')
+                ->where('id', $item)->get();
+
+            array_push($products, $product);
+        }
+        //   return $products;
+        return   json_encode($products);
+    }
 }

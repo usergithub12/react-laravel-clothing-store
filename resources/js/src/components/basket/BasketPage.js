@@ -19,116 +19,105 @@ class BasketPage extends Component {
         }
     };
     componentDidMount() {
+        // let cart = localStorage.getItem("cart");
+        // if (!cart) return;
+        // this.getCartProducts(cart);
         let cart = localStorage.getItem("cart");
         if (!cart) return;
-        this.getCartProducts(cart);
+        this.getCartProducts(cart).then(products => {
+            console.log("THEN products", products);
+            this.setState({ products: products.data });
+        });
     }
 
     getCartProducts(cart) {
         console.log("cart basket", cart);
-        axios
-            .post(`api/product`, { id: cart })
-            .then(response => {
-                //handle success
-                this.setState({
-                    product: response.data
-                });
-                console.log("product from get request", response.data);
-            })
-            .catch(response => {
-                //handle error
-                console.log(response);
-            });
+        return axios.post(`api/cartproducts`, { cart: cart });
     }
 
-    // removeFromCart = product => {
-    //     let products = this.state.products.filter(
-    //         item => item.id !== product.id
-    //     );
-    //     let cart = JSON.parse(localStorage.getItem("cart"));
-    //     delete cart[product.id.toString()];
-    //     localStorage.setItem("cart", JSON.stringify(cart));
-    //     let total = this.state.total - product.qty * product.price;
-    //     this.setState({ products, total });
-    // };
+    removeFromCart = product => {
+        let products = this.state.products.filter(
+            item => item[0].id !== product.id
+        );
+        console.log("remove id", product.id);
+        console.log("new products", products);
+        let cart = JSON.parse(localStorage.getItem("cart"));
+        delete cart[product.id.toString()];
+        localStorage.setItem("cart", JSON.stringify(cart));
+        // let total = this.state.total - product.qty * product.price;
+        this.setState({ products });
+    };
+
     clearCart = () => {
         localStorage.removeItem("cart");
-        // this.setState({ products: [] });
-        this.setState({ product: [] });
+        this.setState({ products: [] });
     };
 
     render() {
         console.log("basket state", this.state);
-        const { product } = this.state;
-        let imgPath = `/images/${product.main_image}`;
-        return (
-            <React.Fragment>
-                {product.id ? (
-                    <div className="basket">
-                        <div className="basket-product">
-                            <div className="item">
-                                <div className="product-image">
-                                    {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
-                                    <img
-                                        src={imgPath}
-                                        style={{
-                                            width: "18vh",
-                                            height: "18vh"
-                                        }}
-                                        alt="Image 2"
-                                        className="product-frame"
-                                    />
-                                </div>
-                                <div className="product-details">
-                                    <h1>
-                                        <strong>{product.name}</strong>
-                                    </h1>
-                                    <p>
-                                        <p>
-                                            {" "}
-                                            {
-                                                product.product_data.color.name
-                                            }{" "}
-                                        </p>
-                                        <p>
-                                            {" "}
-                                            {product.product_data.material.name}
-                                        </p>
-                                        <p> {product.product_data.type.name}</p>
-                                        <p>
-                                            {" "}
-                                            {product.product_data.gender.name}
-                                        </p>
-                                        <p>
-                                            {" "}
-                                            {product.product_data.producer.name}
-                                        </p>
-                                        <p>
-                                            {" "}
-                                            {
-                                                product.product_data.producer
-                                                    .country.name
-                                            }
-                                        </p>
-                                    </p>
-                                    <p>
-                                        <strong>
-                                            Product Code - 232321939
-                                        </strong>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="price">{product.price}</div>
-                            <div className="remove">
-                                <button onClick={this.clearCart}>
-                                    Видалити замовлення
-                                </button>
-                            </div>
+        const { products } = this.state;
+        // let imgPath = `/images/${product[0].main_image}`;
+
+        const cartItem = products.map(product => {
+            return (
+                <div className="basket-product" key={product[0].id}>
+                    <div className="item">
+                        <div className="product-image">
+                            <img
+                                src={`/images/${product[0].main_image}`}
+                                style={{
+                                    width: "18vh",
+                                    height: "18vh"
+                                }}
+                                alt="Image 2"
+                                className="product-frame"
+                            />
+                        </div>
+                        <div className="product-details">
+                            <h1>
+                                <strong>{product[0].name}</strong>
+                            </h1>
+
+                            <p> {product[0].product_data.color.name} </p>
+                            <p> {product[0].product_data.material.name}</p>
+                            <p> {product[0].product_data.type.name}</p>
+                            <p> {product[0].product_data.gender.name}</p>
+                            <p> {product[0].product_data.producer.name}</p>
+                            <p>
+                                {" "}
+                                {product[0].product_data.producer.country.name}
+                            </p>
+
+                            <p>
+                                <strong>Product Code - 232321939</strong>
+                            </p>
                         </div>
                     </div>
-                ) : (
-                    <p>Корзина пуста</p>
-                )}
+                    <div className="price">{product[0].price}</div>
+                    <div className="remove">
+                        <button onClick={() => this.removeFromCart(product[0])}>
+                            Видалити замовлення
+                        </button>
+                    </div>
+                </div>
+            );
+        });
+
+        return (
+            <React.Fragment>
+                <div className="basket">
+                    {cartItem}
+                    {products.length ? (
+                        <button
+                            onClick={() => this.clearCart()}
+                            className="btn btn-danger"
+                        >
+                            Очистити корзину
+                        </button>
+                    ) : (
+                        <p>Корзина пуста!</p>
+                    )}
+                </div>
 
                 <aside>
                     <div className="summary">
