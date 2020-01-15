@@ -12,24 +12,7 @@ export class Admin extends Component {
             isSignedUp: false
         };
     }
-    checkUserExists = () => {
-        const { email } = this.state;
-        var bodyFormData = new FormData();
-        bodyFormData.set("email", email);
-        axios({
-            method: "post",
-            url: "/api/userexists",
-            data: bodyFormData,
-            headers: { "Content-Type": "multipart/form-data" }
-        })
-            .then(response => {
-                this.setState({ isSignedUp: true });
-                console.log(response);
-            })
-            .catch(response => {
-                console.log(response);
-            });
-    };
+
     setStateByErrors = (name, value) => {
         if (!!this.state.errors[name]) {
             let errors = Object.assign({}, this.state.errors);
@@ -134,11 +117,9 @@ export class Admin extends Component {
                                             />
                                         </div>
                                         <Link to="/dashboard">
-                                        <button
-                                        className="btn btn-primary float-center login_btn"
-                                        >
-                                            Вхід
-                                        </button>
+                                            <button className="btn btn-primary float-center login_btn">
+                                                Вхід
+                                            </button>
                                         </Link>
                                     </form>
                                 </div>

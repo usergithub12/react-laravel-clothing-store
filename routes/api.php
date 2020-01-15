@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 */
 // Route::post('login', 'LoginController')->name('login');
 
+//CRUD Products
+Route::post('addproduct', 'ProductController@AddProduct');
+
+/////////////
+
 
 
 Route::post('cartproducts', 'ProductController@getProductsForCart');
@@ -42,8 +47,16 @@ Route::get('productbysize', 'ProductController@getProductsbySize');
 //colors
 Route::get('colors', 'ProductController@getColors');
 Route::get('productbycolor', 'ProductController@getProductsbyColor');
+//genders
+Route::get('genders', 'ProductController@getGenders');
+//countries
+Route::get('countries', 'ProductController@getCountries');
 
 ///
+
+Route::delete('deleteproduct', 'ProductController@deleteProductById');
+
+
 Route::resource('fileupload', 'FileuploadController');
 Route::post('register', 'AuthController@register');
 Route::post('update', 'AuthController@update');
@@ -51,7 +64,7 @@ Route::post('login', 'AuthController@login');
 Route::get('logout', 'AuthController@logout');
 Route::get('user', 'AuthController@getAuthUser');
 
-Route::post('userexists', 'UserController@CheckIfUserExists');
+ Route::post('userexists', 'UserController@CheckIfUserExists');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

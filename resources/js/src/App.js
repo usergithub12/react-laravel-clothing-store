@@ -21,6 +21,9 @@ const UserProfile = lazy(() => import("./components/UserProfile/UserProfile"));
 import Footer from "./components/footer/footer";
 const Admin = lazy(() => import("./components/auth/Admin"));
 const Table = lazy(() => import("./components/auth/Table"));
+const AddProduct = lazy(() =>
+    import("./components/auth/Admin/AddProduct/AddProduct")
+);
 
 class App extends Component {
     render() {
@@ -79,6 +82,9 @@ class App extends Component {
                         </Route>
                         <Route exact path="/basket">
                             <BasketPage />
+                        </Route>
+                        <Route exact path="/addproduct">
+                            <AddProduct />
                         </Route>
                         <Route path="/Shop/:id" component={SingleItem} />
                     </div>
