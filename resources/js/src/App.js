@@ -15,6 +15,9 @@ const ShopList = lazy(() => import("./components/shopList"));
 const SingleItem = lazy(() => import("./components/shopList/SingleItem"));
 const BasketPage = lazy(() => import("./components/basket/BasketPage"));
 const UserProfile = lazy(() => import("./components/UserProfile/UserProfile"));
+const UpdateProduct = lazy(() =>
+    import("./components/auth/Admin/UpdateProduct/UpdateProduct")
+);
 // import RegisterPage from "./components/auth/Register";
 // import Login from "./components/auth/Login";
 // import HomePage from "./components/Home";
@@ -87,6 +90,10 @@ class App extends Component {
                             <AddProduct />
                         </Route>
                         <Route path="/Shop/:id" component={SingleItem} />
+                        <Route
+                            path="/updateproduct/:id"
+                            component={UpdateProduct}
+                        />
                     </div>
                 </Suspense>
             </BrowserRouter>

@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 //CRUD Products
 Route::post('addproduct', 'ProductController@AddProduct');
-
+Route::post('updateproduct', 'ProductController@updateProductById');
 /////////////
 
 
