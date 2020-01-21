@@ -49931,7 +49931,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56187,7 +56187,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 var HomePage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./components/Home */ "./resources/js/src/components/Home/index.js"));
+  return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./components/Home */ "./resources/js/src/components/Home/index.js"));
 });
 var RegisterPage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(3), __webpack_require__.e(6), __webpack_require__.e(1), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./components/auth/Register */ "./resources/js/src/components/auth/Register/index.js"));
@@ -56196,16 +56196,19 @@ var Login = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
   return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./components/auth/Login */ "./resources/js/src/components/auth/Login/index.js"));
 });
 var ShopList = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./components/shopList */ "./resources/js/src/components/shopList/index.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./components/shopList */ "./resources/js/src/components/shopList/index.js"));
 });
 var SingleItem = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./components/shopList/SingleItem */ "./resources/js/src/components/shopList/SingleItem/index.js"));
+  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./components/shopList/SingleItem */ "./resources/js/src/components/shopList/SingleItem/index.js"));
 });
 var BasketPage = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./components/basket/BasketPage */ "./resources/js/src/components/basket/BasketPage.js"));
+  return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./components/basket/BasketPage */ "./resources/js/src/components/basket/BasketPage.js"));
 });
 var UserProfile = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(3), __webpack_require__.e(1), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./components/UserProfile/UserProfile */ "./resources/js/src/components/UserProfile/UserProfile.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(3), __webpack_require__.e(1), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./components/UserProfile/UserProfile */ "./resources/js/src/components/UserProfile/UserProfile.js"));
+});
+var UpdateProduct = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ./components/auth/Admin/UpdateProduct/UpdateProduct */ "./resources/js/src/components/auth/Admin/UpdateProduct/UpdateProduct.js"));
 }); // import RegisterPage from "./components/auth/Register";
 // import Login from "./components/auth/Login";
 // import HomePage from "./components/Home";
@@ -56215,10 +56218,10 @@ var Admin = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
   return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./components/auth/Admin */ "./resources/js/src/components/auth/Admin/index.js"));
 });
 var Table = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./components/auth/Table */ "./resources/js/src/components/auth/Table/index.js"));
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./components/auth/Table */ "./resources/js/src/components/auth/Table/index.js"));
 });
 var AddProduct = Object(react__WEBPACK_IMPORTED_MODULE_2__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./components/auth/Admin/AddProduct/AddProduct */ "./resources/js/src/components/auth/Admin/AddProduct/AddProduct.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./components/auth/Admin/AddProduct/AddProduct */ "./resources/js/src/components/auth/Admin/AddProduct/AddProduct.js"));
 });
 
 var App =
@@ -56288,6 +56291,9 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(AddProduct, null)), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
         path: "/Shop/:id",
         component: SingleItem
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+        path: "/updateproduct/:id",
+        component: UpdateProduct
       }))));
     }
   }]);

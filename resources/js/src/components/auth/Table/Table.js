@@ -46,6 +46,8 @@ class Table extends Component {
             });
     };
 
+    updateProduct = () => {};
+
     renderTableData() {
         const { products } = this.state;
         const imgStyle = {
@@ -80,7 +82,12 @@ class Table extends Component {
                     <td> {product_data.producer.name}</td>
                     <td> {product_data.producer.country.name}</td>
                     <td>
-                        <button className="btn btn-primary">Редагувати</button>{" "}
+                        <Link
+                            to={`/updateproduct/${id}`}
+                            className="btn btn-primary"
+                        >
+                            Редагувати
+                        </Link>{" "}
                         <button
                             className="btn btn-danger"
                             onClick={this.deleteProduct.bind(this, product)}

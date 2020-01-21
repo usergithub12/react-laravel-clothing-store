@@ -20,13 +20,7 @@ class ProductController extends Controller
 
     public function AddProduct(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'name' => 'required',
-        //     'price' => 'required',
-        //     'size' => 'required',
-        //     'rating' => 'required',
-        //     'main_image' => 'required',
-        //   ]);
+
         $image = Fileupload::latest('id')->first()->filename;
         $product = new Product();
 
@@ -36,41 +30,39 @@ class ProductController extends Controller
         $product->rating = $request->rating;
         $product->main_image = $image;
         $product->images = $image;
-        //belongs to
-        //   $user->account()->associate($account);
 
         $product_data = new ProductData();
         //color
-        // $color=Color::where('name',$request->color)->first();
+
         $color = Color::find($request->color);
         $product_data->color()->associate($color);
 
         //material
-        //  $material=Material::where('name',$request->material)->first();
+
         $material = Material::find($request->material);
         $product_data->material()->associate($material);
-        //  $material->save();
+
         //Type
-        //  $type=Type::where('name',$request->type)->first();
+
         $type = Type::find($request->type);
         $product_data->type()->associate($type);
-        //  $type->save();
+
         //Gender
-        //  $gender=Gender::where('name',$request->gender)->first();
+
         $gender = Gender::find($request->gender);
         $product_data->gender()->associate($gender);
-        //  $gender->save();
+
         //Country
-        //   $producer=Producer::where('name',$request->producer)->first();
+
         $producer = Producer::find($request->producer);
-        // $country=Country::where('name',$request->country)->first();
+
         $country = Country::find($request->country);
         $producer->country()->associate($country);
         $product_data->producer()->associate($producer);
         $product_data->save();
         $product->product_data()->associate($product_data);
         $product->save();
-        //   $product_data->products()->associate($product);
+
 
 
         return response()->json('Product created!');
@@ -229,5 +221,54 @@ class ProductController extends Controller
         $product = Product::find($request->id);
         $product->delete();
         return response()->json('Product deleted!');
+    }
+
+
+    public function updateProductById(Request $request)
+    {
+        $image = Fileupload::latest('id')->first()->filename;
+
+        $product = Product::find($request->id);
+
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->size = $request->size;
+        $product->rating = $request->rating;
+        $product->main_image = $image;
+        $product->images = $image;
+        //related data
+        $product_data = new ProductData();
+        //color
+
+        $color = Color::where("name", $request->color)->first();
+        $product_data->color()->associate($color);
+
+        //material
+
+        $material = Material::where("name", $request->material)->first();
+        $product_data->material()->associate($material);
+
+        //Type
+
+        $type = Type::where("name", $request->type)->first();
+        $product_data->type()->associate($type);
+
+        //Gender
+
+        $gender = Gender::where("name", $request->gender)->first();
+        $product_data->gender()->associate($gender);
+
+        //Country
+
+        $producer = Producer::where("name", $request->producer)->first();
+
+        $country = Country::where("name", $request->country)->first();
+        $producer->country()->associate($country);
+        $product_data->producer()->associate($producer);
+        $product_data->save();
+        $product->product_data()->associate($product_data);
+        $product->save();
+
+        return response()->json('Product updated!');
     }
 }
