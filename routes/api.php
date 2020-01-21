@@ -18,8 +18,14 @@ use Illuminate\Http\Request;
 Route::post('addproduct', 'ProductController@AddProduct');
 Route::post('updateproduct', 'ProductController@updateProductById');
 /////////////
+
+
+
+Route::post('cartproducts', 'ProductController@getProductsForCart');
+
 Route::get('prod', 'ProductController@getProducts');
 Route::get('product', 'ProductController@getProduct');
+Route::post('product', 'ProductController@getProduct');
 //FILTERS
 Route::get('productbypricedesc', 'ProductController@getProductsbyPriceDesc');
 Route::get('productbypriceasc', 'ProductController@getProductsbyPriceAsc');
@@ -58,7 +64,7 @@ Route::post('login', 'AuthController@login');
 Route::get('logout', 'AuthController@logout');
 Route::get('user', 'AuthController@getAuthUser');
 
-Route::post('userexists', 'UserController@CheckIfUserExists');
+ Route::post('userexists', 'UserController@CheckIfUserExists');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

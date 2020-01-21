@@ -14,8 +14,28 @@ export class SingleItem extends Component {
                     country: {}
                 }
             }
-        }
+        },
+        quantity: 1
     };
+
+    addToCart = () => {
+        const { id } = this.props.match.params;
+        console.log("add to cart");
+        let cart = localStorage.getItem("cart")
+            ? JSON.parse(localStorage.getItem("cart"))
+            : {};
+        // let id = this.props.product.id.toString();
+
+        console.log("add to cart id", id);
+
+        cart[id] = cart[id] ? cart[id] : 0;
+        //  let qty = cart[id] + parseInt(this.state.quantity);
+
+        cart[id] = id;
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+    };
+
     componentDidMount() {
         const { id } = this.props.match.params;
         console.log("id", id);
@@ -183,9 +203,13 @@ export class SingleItem extends Component {
 
                             <div className="row">
                                 <div className="col">
-                                <Link  className="btn btn-raised btn-primary btn-lg" to="/basket">
-                                Додати в кошик
-                            </Link>
+                                    <Link
+                                        onClick={this.addToCart}
+                                        className="btn btn-raised btn-primary btn-lg"
+                                        to="/basket"
+                                    >
+                                        Додати в кошик
+                                    </Link>
                                 </div>
                                 <div className="col">
                                     <Link
